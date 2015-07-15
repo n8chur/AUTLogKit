@@ -1,0 +1,422 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E45C22E21B55D6EC0014C344 /* AUTLogKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E45C22E11B55D6EC0014C344 /* AUTLogKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E45C22E81B55D6ED0014C344 /* AUTLogKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45C22DC1B55D6EC0014C344 /* AUTLogKit.framework */; };
+		E45C22EF1B55D6ED0014C344 /* AUTLogKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E45C22EE1B55D6ED0014C344 /* AUTLogKitTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E45C22E91B55D6ED0014C344 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E45C22D31B55D6EC0014C344 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E45C22DB1B55D6EC0014C344;
+			remoteInfo = AUTLogKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E45C22DC1B55D6EC0014C344 /* AUTLogKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AUTLogKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E45C22E01B55D6EC0014C344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E45C22E11B55D6EC0014C344 /* AUTLogKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AUTLogKit.h; sourceTree = "<group>"; };
+		E45C22E71B55D6ED0014C344 /* AUTLogKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AUTLogKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E45C22ED1B55D6ED0014C344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E45C22EE1B55D6ED0014C344 /* AUTLogKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AUTLogKitTests.m; sourceTree = "<group>"; };
+		E45C22F91B55D8590014C344 /* AUTLogKit.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = AUTLogKit.xcconfig; path = AUTLogKit/AUTLogKit.xcconfig; sourceTree = "<group>"; };
+		E45C22FB1B55D86C0014C344 /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		E45C22FD1B55D86C0014C344 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		E45C22FE1B55D86C0014C344 /* Profile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Profile.xcconfig; sourceTree = "<group>"; };
+		E45C22FF1B55D86C0014C344 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		E45C23001B55D86C0014C344 /* Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Test.xcconfig; sourceTree = "<group>"; };
+		E45C23021B55D86C0014C344 /* Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Application.xcconfig; sourceTree = "<group>"; };
+		E45C23031B55D86C0014C344 /* Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Framework.xcconfig; sourceTree = "<group>"; };
+		E45C23041B55D86C0014C344 /* StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = StaticLibrary.xcconfig; sourceTree = "<group>"; };
+		E45C23081B55D86C0014C344 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = "<group>"; };
+		E45C23091B55D86C0014C344 /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
+		E45C230A1B55D86C0014C344 /* NSLogRouter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NSLogRouter.framework; sourceTree = "<group>"; };
+		E45C230C1B55D86C0014C344 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = "<group>"; };
+		E45C230D1B55D86C0014C344 /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
+		E45C230F1B55D86C0014C344 /* iOS-Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-Application.xcconfig"; sourceTree = "<group>"; };
+		E45C23101B55D86C0014C344 /* iOS-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-Base.xcconfig"; sourceTree = "<group>"; };
+		E45C23111B55D86C0014C344 /* iOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-Framework.xcconfig"; sourceTree = "<group>"; };
+		E45C23121B55D86C0014C344 /* iOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		E45C23131B55D8A10014C344 /* AUTLogKitTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = AUTLogKitTests.xcconfig; path = AUTLogKitTests/AUTLogKitTests.xcconfig; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E45C22D81B55D6EC0014C344 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E45C22E41B55D6ED0014C344 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E45C22E81B55D6ED0014C344 /* AUTLogKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E45C22D21B55D6EC0014C344 = {
+			isa = PBXGroup;
+			children = (
+				E45C22F81B55D7E90014C344 /* configs */,
+				E45C22DE1B55D6EC0014C344 /* AUTLogKit */,
+				E45C22EB1B55D6ED0014C344 /* AUTLogKitTests */,
+				E45C22DD1B55D6EC0014C344 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E45C22DD1B55D6EC0014C344 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E45C22DC1B55D6EC0014C344 /* AUTLogKit.framework */,
+				E45C22E71B55D6ED0014C344 /* AUTLogKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E45C22DE1B55D6EC0014C344 /* AUTLogKit */ = {
+			isa = PBXGroup;
+			children = (
+				E45C22E11B55D6EC0014C344 /* AUTLogKit.h */,
+				E45C22DF1B55D6EC0014C344 /* Supporting Files */,
+			);
+			path = AUTLogKit;
+			sourceTree = "<group>";
+		};
+		E45C22DF1B55D6EC0014C344 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E45C22E01B55D6EC0014C344 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E45C22EB1B55D6ED0014C344 /* AUTLogKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				E45C22EE1B55D6ED0014C344 /* AUTLogKitTests.m */,
+				E45C22EC1B55D6ED0014C344 /* Supporting Files */,
+			);
+			path = AUTLogKitTests;
+			sourceTree = "<group>";
+		};
+		E45C22EC1B55D6ED0014C344 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E45C22ED1B55D6ED0014C344 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E45C22F81B55D7E90014C344 /* configs */ = {
+			isa = PBXGroup;
+			children = (
+				E45C22F91B55D8590014C344 /* AUTLogKit.xcconfig */,
+				E45C23131B55D8A10014C344 /* AUTLogKitTests.xcconfig */,
+				E45C22FA1B55D86C0014C344 /* Base */,
+				E45C23051B55D86C0014C344 /* Carthage */,
+				E45C230E1B55D86C0014C344 /* iOS */,
+			);
+			name = configs;
+			sourceTree = "<group>";
+		};
+		E45C22FA1B55D86C0014C344 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				E45C22FB1B55D86C0014C344 /* Common.xcconfig */,
+				E45C22FC1B55D86C0014C344 /* Configurations */,
+				E45C23011B55D86C0014C344 /* Targets */,
+			);
+			name = Base;
+			path = Carthage/Checkouts/xcconfigs/Base;
+			sourceTree = "<group>";
+		};
+		E45C22FC1B55D86C0014C344 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				E45C22FD1B55D86C0014C344 /* Debug.xcconfig */,
+				E45C22FE1B55D86C0014C344 /* Profile.xcconfig */,
+				E45C22FF1B55D86C0014C344 /* Release.xcconfig */,
+				E45C23001B55D86C0014C344 /* Test.xcconfig */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
+		E45C23011B55D86C0014C344 /* Targets */ = {
+			isa = PBXGroup;
+			children = (
+				E45C23021B55D86C0014C344 /* Application.xcconfig */,
+				E45C23031B55D86C0014C344 /* Framework.xcconfig */,
+				E45C23041B55D86C0014C344 /* StaticLibrary.xcconfig */,
+			);
+			path = Targets;
+			sourceTree = "<group>";
+		};
+		E45C23051B55D86C0014C344 /* Carthage */ = {
+			isa = PBXGroup;
+			children = (
+				E45C23061B55D86C0014C344 /* Build */,
+			);
+			name = Carthage;
+			path = Carthage/Checkouts/xcconfigs/Carthage;
+			sourceTree = "<group>";
+		};
+		E45C23061B55D86C0014C344 /* Build */ = {
+			isa = PBXGroup;
+			children = (
+				E45C23071B55D86C0014C344 /* iOS */,
+				E45C230B1B55D86C0014C344 /* Mac */,
+			);
+			path = Build;
+			sourceTree = "<group>";
+		};
+		E45C23071B55D86C0014C344 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				E45C23081B55D86C0014C344 /* CocoaLumberjack.framework */,
+				E45C23091B55D86C0014C344 /* CocoaLumberjackSwift.framework */,
+				E45C230A1B55D86C0014C344 /* NSLogRouter.framework */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		E45C230B1B55D86C0014C344 /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				E45C230C1B55D86C0014C344 /* CocoaLumberjack.framework */,
+				E45C230D1B55D86C0014C344 /* CocoaLumberjackSwift.framework */,
+			);
+			path = Mac;
+			sourceTree = "<group>";
+		};
+		E45C230E1B55D86C0014C344 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				E45C230F1B55D86C0014C344 /* iOS-Application.xcconfig */,
+				E45C23101B55D86C0014C344 /* iOS-Base.xcconfig */,
+				E45C23111B55D86C0014C344 /* iOS-Framework.xcconfig */,
+				E45C23121B55D86C0014C344 /* iOS-StaticLibrary.xcconfig */,
+			);
+			name = iOS;
+			path = Carthage/Checkouts/xcconfigs/iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E45C22D91B55D6EC0014C344 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E45C22E21B55D6EC0014C344 /* AUTLogKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		E45C22DB1B55D6EC0014C344 /* AUTLogKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E45C22F21B55D6ED0014C344 /* Build configuration list for PBXNativeTarget "AUTLogKit" */;
+			buildPhases = (
+				E45C22D71B55D6EC0014C344 /* Sources */,
+				E45C22D81B55D6EC0014C344 /* Frameworks */,
+				E45C22D91B55D6EC0014C344 /* Headers */,
+				E45C22DA1B55D6EC0014C344 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AUTLogKit;
+			productName = AUTLogKit;
+			productReference = E45C22DC1B55D6EC0014C344 /* AUTLogKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E45C22E61B55D6ED0014C344 /* AUTLogKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E45C22F51B55D6ED0014C344 /* Build configuration list for PBXNativeTarget "AUTLogKitTests" */;
+			buildPhases = (
+				E45C22E31B55D6ED0014C344 /* Sources */,
+				E45C22E41B55D6ED0014C344 /* Frameworks */,
+				E45C22E51B55D6ED0014C344 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E45C22EA1B55D6ED0014C344 /* PBXTargetDependency */,
+			);
+			name = AUTLogKitTests;
+			productName = AUTLogKitTests;
+			productReference = E45C22E71B55D6ED0014C344 /* AUTLogKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E45C22D31B55D6EC0014C344 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Automatic Labs";
+				TargetAttributes = {
+					E45C22DB1B55D6EC0014C344 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					E45C22E61B55D6ED0014C344 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = E45C22D61B55D6EC0014C344 /* Build configuration list for PBXProject "AUTLogKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E45C22D21B55D6EC0014C344;
+			productRefGroup = E45C22DD1B55D6EC0014C344 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E45C22DB1B55D6EC0014C344 /* AUTLogKit */,
+				E45C22E61B55D6ED0014C344 /* AUTLogKitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E45C22DA1B55D6EC0014C344 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E45C22E51B55D6ED0014C344 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E45C22D71B55D6EC0014C344 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E45C22E31B55D6ED0014C344 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E45C22EF1B55D6ED0014C344 /* AUTLogKitTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E45C22EA1B55D6ED0014C344 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E45C22DB1B55D6EC0014C344 /* AUTLogKit */;
+			targetProxy = E45C22E91B55D6ED0014C344 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		E45C22F01B55D6ED0014C344 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E45C22FD1B55D86C0014C344 /* Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		E45C22F11B55D6ED0014C344 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E45C22FF1B55D86C0014C344 /* Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		E45C22F31B55D6ED0014C344 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E45C22F91B55D8590014C344 /* AUTLogKit.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		E45C22F41B55D6ED0014C344 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E45C22F91B55D8590014C344 /* AUTLogKit.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		E45C22F61B55D6ED0014C344 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E45C23131B55D8A10014C344 /* AUTLogKitTests.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		E45C22F71B55D6ED0014C344 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E45C23131B55D8A10014C344 /* AUTLogKitTests.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E45C22D61B55D6EC0014C344 /* Build configuration list for PBXProject "AUTLogKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E45C22F01B55D6ED0014C344 /* Debug */,
+				E45C22F11B55D6ED0014C344 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E45C22F21B55D6ED0014C344 /* Build configuration list for PBXNativeTarget "AUTLogKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E45C22F31B55D6ED0014C344 /* Debug */,
+				E45C22F41B55D6ED0014C344 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E45C22F51B55D6ED0014C344 /* Build configuration list for PBXNativeTarget "AUTLogKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E45C22F61B55D6ED0014C344 /* Debug */,
+				E45C22F71B55D6ED0014C344 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E45C22D31B55D6EC0014C344 /* Project object */;
+}

@@ -1,0 +1,4 @@
+github "CocoaLumberjack/CocoaLumberjack" "2.0.1"
+github "specta/expecta" "v1.0.1"
+github "specta/specta" "v1.0.2"
+github "jspahrsummers/xcconfigs" "0.8.1"
