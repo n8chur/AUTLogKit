@@ -12,8 +12,8 @@
 typedef const void *AUTLogContextIdentifier;
 
 typedef NS_OPTIONS(NSUInteger, AUTLogFlag) {
-    AUTLogFlagError      = (1 << 0), // 0...00001
-    AUTLogFlagInfo       = (1 << 2), // 0...00100
+    AUTLogFlagError      = DDLogFlagError, // 0...00001
+    AUTLogFlagInfo       = DDLogFlagInfo,  // 0...00100
 };
 
 typedef NS_OPTIONS(NSUInteger, AUTLogLevel) {
@@ -49,4 +49,4 @@ typedef struct AUTLogContext {
 /**
  * A method to atomically set a log level for a given context.
  */
-extern bool AUTLogContextSetLevel(AUTLogContext ctx, AUTLogLevel level);
+extern bool AUTLogContextSetLevel(const AUTLogContext * const ctx, AUTLogLevel level);

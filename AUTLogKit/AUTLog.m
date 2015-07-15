@@ -10,6 +10,6 @@
 #import "AUTLog.h"
 #import <libkern/OSAtomic.h>
 
-bool AUTLogContextSetLevel(AUTLogContext ctx, AUTLogLevel level) {
-    return OSAtomicCompareAndSwapLong(ctx.level, level, (volatile long *)&ctx.level);
+bool AUTLogContextSetLevel(const AUTLogContext * const ctx, AUTLogLevel level) {
+    return OSAtomicCompareAndSwapLong(ctx->level, level, (volatile long *)&ctx->level);
 }

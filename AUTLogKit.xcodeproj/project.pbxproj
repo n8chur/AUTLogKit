@@ -19,6 +19,8 @@
 		E45C23241B55DB830014C344 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45C23181B55DAC20014C344 /* CocoaLumberjack.framework */; };
 		E45C23261B55E4830014C344 /* AUTLogSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E45C23251B55E4830014C344 /* AUTLogSpec.m */; };
 		E45C23281B55F3980014C344 /* AUTLog.m in Sources */ = {isa = PBXBuildFile; fileRef = E45C23271B55F3980014C344 /* AUTLog.m */; };
+		E45C232B1B56DFBB0014C344 /* DDStubLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = E45C23291B56DFBB0014C344 /* DDStubLogger.h */; };
+		E45C232D1B56E16F0014C344 /* DDStubLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = E45C232A1B56DFBB0014C344 /* DDStubLogger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,8 @@
 		E45C231E1B55DB730014C344 /* Specta.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Specta.framework; path = Carthage/Build/iOS/Specta.framework; sourceTree = "<group>"; };
 		E45C23251B55E4830014C344 /* AUTLogSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogSpec.m; sourceTree = "<group>"; };
 		E45C23271B55F3980014C344 /* AUTLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLog.m; sourceTree = "<group>"; };
+		E45C23291B56DFBB0014C344 /* DDStubLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDStubLogger.h; sourceTree = "<group>"; };
+		E45C232A1B56DFBB0014C344 /* DDStubLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStubLogger.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +134,8 @@
 				E45C23141B55DA910014C344 /* AUTLog.h */,
 				E45C22DF1B55D6EC0014C344 /* Supporting Files */,
 				E45C23271B55F3980014C344 /* AUTLog.m */,
+				E45C23291B56DFBB0014C344 /* DDStubLogger.h */,
+				E45C232A1B56DFBB0014C344 /* DDStubLogger.m */,
 			);
 			path = AUTLogKit;
 			sourceTree = "<group>";
@@ -269,6 +275,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E45C232B1B56DFBB0014C344 /* DDStubLogger.h in Headers */,
 				E45C23161B55DA910014C344 /* AUTLog.h in Headers */,
 				E45C22E21B55D6EC0014C344 /* AUTLogKit.h in Headers */,
 			);
@@ -398,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E45C23261B55E4830014C344 /* AUTLogSpec.m in Sources */,
+				E45C232D1B56E16F0014C344 /* DDStubLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
