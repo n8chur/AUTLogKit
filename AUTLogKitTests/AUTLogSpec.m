@@ -12,12 +12,10 @@
 
 SpecBegin(AUTLog)
 
-DDLogLevel ddLogLevel = DDLogLevelInfo;
-
-AUTLogContext TestContext = &TestContext;
+struct AUTLogContext AUTLogKitTestContext = { .level   = AUTLogLevelOff };
 
 describe(@"it should log", ^{
-    AUTLogError(TestContext, @"This is a log");
+    AUTLogError(AUTLogKitTestContext, @"This is a log");
 });
 
 SpecEnd
