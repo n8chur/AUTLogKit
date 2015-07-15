@@ -9,7 +9,15 @@
 /* Begin PBXBuildFile section */
 		E45C22E21B55D6EC0014C344 /* AUTLogKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E45C22E11B55D6EC0014C344 /* AUTLogKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E45C22E81B55D6ED0014C344 /* AUTLogKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45C22DC1B55D6EC0014C344 /* AUTLogKit.framework */; };
-		E45C22EF1B55D6ED0014C344 /* AUTLogKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E45C22EE1B55D6ED0014C344 /* AUTLogKitTests.m */; };
+		E45C23161B55DA910014C344 /* AUTLog.h in Headers */ = {isa = PBXBuildFile; fileRef = E45C23141B55DA910014C344 /* AUTLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E45C23191B55DAC20014C344 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45C23181B55DAC20014C344 /* CocoaLumberjack.framework */; };
+		E45C231F1B55DB730014C344 /* Expecta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45C231D1B55DB730014C344 /* Expecta.framework */; };
+		E45C23201B55DB730014C344 /* Specta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45C231E1B55DB730014C344 /* Specta.framework */; };
+		E45C23211B55DB7C0014C344 /* Expecta.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = E45C231D1B55DB730014C344 /* Expecta.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E45C23221B55DB7C0014C344 /* Specta.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = E45C231E1B55DB730014C344 /* Specta.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E45C23231B55DB7C0014C344 /* CocoaLumberjack.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = E45C23181B55DAC20014C344 /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E45C23241B55DB830014C344 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45C23181B55DAC20014C344 /* CocoaLumberjack.framework */; };
+		E45C23261B55E4830014C344 /* AUTLogSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E45C23251B55E4830014C344 /* AUTLogSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -22,13 +30,28 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		E45C231C1B55DB2B0014C344 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E45C23211B55DB7C0014C344 /* Expecta.framework in Copy Frameworks */,
+				E45C23221B55DB7C0014C344 /* Specta.framework in Copy Frameworks */,
+				E45C23231B55DB7C0014C344 /* CocoaLumberjack.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		E45C22DC1B55D6EC0014C344 /* AUTLogKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AUTLogKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E45C22E01B55D6EC0014C344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E45C22E11B55D6EC0014C344 /* AUTLogKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AUTLogKit.h; sourceTree = "<group>"; };
 		E45C22E71B55D6ED0014C344 /* AUTLogKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AUTLogKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E45C22ED1B55D6ED0014C344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E45C22EE1B55D6ED0014C344 /* AUTLogKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AUTLogKitTests.m; sourceTree = "<group>"; };
 		E45C22F91B55D8590014C344 /* AUTLogKit.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = AUTLogKit.xcconfig; path = AUTLogKit/AUTLogKit.xcconfig; sourceTree = "<group>"; };
 		E45C22FB1B55D86C0014C344 /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		E45C22FD1B55D86C0014C344 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -48,6 +71,11 @@
 		E45C23111B55D86C0014C344 /* iOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-Framework.xcconfig"; sourceTree = "<group>"; };
 		E45C23121B55D86C0014C344 /* iOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		E45C23131B55D8A10014C344 /* AUTLogKitTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = AUTLogKitTests.xcconfig; path = AUTLogKitTests/AUTLogKitTests.xcconfig; sourceTree = SOURCE_ROOT; };
+		E45C23141B55DA910014C344 /* AUTLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUTLog.h; sourceTree = "<group>"; };
+		E45C23181B55DAC20014C344 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
+		E45C231D1B55DB730014C344 /* Expecta.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Expecta.framework; path = Carthage/Build/iOS/Expecta.framework; sourceTree = "<group>"; };
+		E45C231E1B55DB730014C344 /* Specta.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Specta.framework; path = Carthage/Build/iOS/Specta.framework; sourceTree = "<group>"; };
+		E45C23251B55E4830014C344 /* AUTLogSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogSpec.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E45C23191B55DAC20014C344 /* CocoaLumberjack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +92,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E45C22E81B55D6ED0014C344 /* AUTLogKit.framework in Frameworks */,
+				E45C23201B55DB730014C344 /* Specta.framework in Frameworks */,
+				E45C231F1B55DB730014C344 /* Expecta.framework in Frameworks */,
+				E45C23241B55DB830014C344 /* CocoaLumberjack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +108,7 @@
 				E45C22DE1B55D6EC0014C344 /* AUTLogKit */,
 				E45C22EB1B55D6ED0014C344 /* AUTLogKitTests */,
 				E45C22DD1B55D6EC0014C344 /* Products */,
+				E45C231A1B55DAC80014C344 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				E45C22E11B55D6EC0014C344 /* AUTLogKit.h */,
+				E45C23141B55DA910014C344 /* AUTLog.h */,
 				E45C22DF1B55D6EC0014C344 /* Supporting Files */,
 			);
 			path = AUTLogKit;
@@ -108,8 +142,8 @@
 		E45C22EB1B55D6ED0014C344 /* AUTLogKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				E45C22EE1B55D6ED0014C344 /* AUTLogKitTests.m */,
 				E45C22EC1B55D6ED0014C344 /* Supporting Files */,
+				E45C23251B55E4830014C344 /* AUTLogSpec.m */,
 			);
 			path = AUTLogKitTests;
 			sourceTree = "<group>";
@@ -215,6 +249,16 @@
 			path = Carthage/Checkouts/xcconfigs/iOS;
 			sourceTree = "<group>";
 		};
+		E45C231A1B55DAC80014C344 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E45C231D1B55DB730014C344 /* Expecta.framework */,
+				E45C231E1B55DB730014C344 /* Specta.framework */,
+				E45C23181B55DAC20014C344 /* CocoaLumberjack.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -222,6 +266,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E45C23161B55DA910014C344 /* AUTLog.h in Headers */,
 				E45C22E21B55D6EC0014C344 /* AUTLogKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,6 +282,7 @@
 				E45C22D81B55D6EC0014C344 /* Frameworks */,
 				E45C22D91B55D6EC0014C344 /* Headers */,
 				E45C22DA1B55D6EC0014C344 /* Resources */,
+				E45C231B1B55DB190014C344 /* Copy Product to Carthage/Build/iOS */,
 			);
 			buildRules = (
 			);
@@ -254,6 +300,7 @@
 				E45C22E31B55D6ED0014C344 /* Sources */,
 				E45C22E41B55D6ED0014C344 /* Frameworks */,
 				E45C22E51B55D6ED0014C344 /* Resources */,
+				E45C231C1B55DB2B0014C344 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -317,6 +364,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E45C231B1B55DB190014C344 /* Copy Product to Carthage/Build/iOS */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Product to Carthage/Build/iOS";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "build_dir=\"$SRCROOT/Carthage/Build\"\n\n# If the build dir is not a symbolic link, continue\nif ! [ -L \"$build_dir\" ]; then exit 0; fi\n\ndest_dir=\"$build_dir/iOS\"\nframework_name=\"$PRODUCT_NAME.framework\"\n\nrm -rf \"$dest_dir/$framework_name\"\ncp -fR \"$BUILT_PRODUCTS_DIR/$framework_name\" \"$dest_dir\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E45C22D71B55D6EC0014C344 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -329,7 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E45C22EF1B55D6ED0014C344 /* AUTLogKitTests.m in Sources */,
+				E45C23261B55E4830014C344 /* AUTLogSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +426,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E45C22F91B55D8590014C344 /* AUTLogKit.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 			};
 			name = Debug;
 		};
@@ -369,6 +437,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E45C22F91B55D8590014C344 /* AUTLogKit.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 			};
 			name = Release;
 		};
@@ -376,6 +448,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E45C23131B55D8A10014C344 /* AUTLogKitTests.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 			};
 			name = Debug;
 		};
@@ -383,6 +459,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E45C23131B55D8A10014C344 /* AUTLogKitTests.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 			};
 			name = Release;
 		};
