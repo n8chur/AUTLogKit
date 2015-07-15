@@ -6,9 +6,10 @@
 //  Copyright (c) 2015 Automatic Labs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "AUTLog.h"
+@import Foundation;
 #import <libkern/OSAtomic.h>
+
+#import "AUTLog.h"
 
 bool AUTLogContextSetLevel(const AUTLogContext * const ctx, AUTLogLevel level) {
     return OSAtomicCompareAndSwapLong(ctx->level, level, (volatile long *)&ctx->level);

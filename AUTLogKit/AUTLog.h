@@ -23,30 +23,27 @@ typedef NS_OPTIONS(NSUInteger, AUTLogLevel) {
     AUTLogLevelAll   = NSUIntegerMax,
 };
 
+/// A context to associate a group of related log statements.
+///
+/// For example, all logs related to network connections could be grouped into
+/// a context.
 typedef struct AUTLogContext {
-    /**
-     * A log level for this context. Can be initialized with a default value.
-     * Use AUTSetContextLevel to set afterwards to ensure thread safety.
-     */
+     /// A log level for this context. Can be initialized with a default value.
+     /// Use AUTSetContextLevel to set afterwards to ensure thread safety.
     volatile AUTLogLevel level;
 } AUTLogContext;
 
-/**
- * Define version of the macro that only executes if the log level is above the threshold.
- * The compiled versions essentially look like this:
- *
- * if (logFlagForThisLogMsg & logLevelForContext:XXX) { execute log message }
- */
+
+/// Define version of the macro that only executes if the log level is above the threshold.
+/// The compiled versions essentially look like this:
+///
+/// if (logFlagForThisLogMsg & logLevelForContext:XXX) { execute log message }
 #define AUT_LOG_MAYBE(async, ctx, flg, tag, fnct, frmt, ...) \
         do { if(ctx.level & flg) LOG_MACRO(async, (DDLogLevel)ctx.level, (DDLogFlag)flg, (NSInteger)&ctx, tag, fnct, frmt, ##__VA_ARGS__); } while(0)
 
-/**
- * Ready to use log macros with specific context.
- **/
+/// Ready to use log macros with specific context.
 #define AUTLogError(ctx, frmt, ...) AUT_LOG_MAYBE(NO,                ctx, AUTLogFlagError, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 #define AUTLogInfo(ctx, frmt, ...)  AUT_LOG_MAYBE(LOG_ASYNC_ENABLED, ctx, AUTLogFlagInfo, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
-/**
- * A method to atomically set a log level for a given context.
- */
+/// A method to atomically set a log level for a given context.
 extern bool AUTLogContextSetLevel(const AUTLogContext * const ctx, AUTLogLevel level);

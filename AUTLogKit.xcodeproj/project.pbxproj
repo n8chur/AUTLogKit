@@ -80,8 +80,8 @@
 		E45C231E1B55DB730014C344 /* Specta.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Specta.framework; path = Carthage/Build/iOS/Specta.framework; sourceTree = "<group>"; };
 		E45C23251B55E4830014C344 /* AUTLogSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogSpec.m; sourceTree = "<group>"; };
 		E45C23271B55F3980014C344 /* AUTLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLog.m; sourceTree = "<group>"; };
-		E45C23291B56DFBB0014C344 /* DDStubLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDStubLogger.h; sourceTree = "<group>"; };
-		E45C232A1B56DFBB0014C344 /* DDStubLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStubLogger.m; sourceTree = "<group>"; };
+		E45C23291B56DFBB0014C344 /* DDStubLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDStubLogger.h; path = ../AUTLogKit/DDStubLogger.h; sourceTree = "<group>"; };
+		E45C232A1B56DFBB0014C344 /* DDStubLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDStubLogger.m; path = ../AUTLogKit/DDStubLogger.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,14 +107,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3AEF94F11B56E69600559E77 /* Specs */ = {
+			isa = PBXGroup;
+			children = (
+				E45C23251B55E4830014C344 /* AUTLogSpec.m */,
+			);
+			name = Specs;
+			sourceTree = "<group>";
+		};
+		3AEF94F21B56E6A100559E77 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E45C23291B56DFBB0014C344 /* DDStubLogger.h */,
+				E45C232A1B56DFBB0014C344 /* DDStubLogger.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		E45C22D21B55D6EC0014C344 = {
 			isa = PBXGroup;
 			children = (
-				E45C22F81B55D7E90014C344 /* configs */,
 				E45C22DE1B55D6EC0014C344 /* AUTLogKit */,
 				E45C22EB1B55D6ED0014C344 /* AUTLogKitTests */,
-				E45C22DD1B55D6EC0014C344 /* Products */,
+				E45C22F81B55D7E90014C344 /* Configuration */,
 				E45C231A1B55DAC80014C344 /* Frameworks */,
+				E45C22DD1B55D6EC0014C344 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,10 +149,8 @@
 			children = (
 				E45C22E11B55D6EC0014C344 /* AUTLogKit.h */,
 				E45C23141B55DA910014C344 /* AUTLog.h */,
-				E45C22DF1B55D6EC0014C344 /* Supporting Files */,
 				E45C23271B55F3980014C344 /* AUTLog.m */,
-				E45C23291B56DFBB0014C344 /* DDStubLogger.h */,
-				E45C232A1B56DFBB0014C344 /* DDStubLogger.m */,
+				E45C22DF1B55D6EC0014C344 /* Supporting Files */,
 			);
 			path = AUTLogKit;
 			sourceTree = "<group>";
@@ -151,8 +166,9 @@
 		E45C22EB1B55D6ED0014C344 /* AUTLogKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				3AEF94F21B56E6A100559E77 /* Helpers */,
+				3AEF94F11B56E69600559E77 /* Specs */,
 				E45C22EC1B55D6ED0014C344 /* Supporting Files */,
-				E45C23251B55E4830014C344 /* AUTLogSpec.m */,
 			);
 			path = AUTLogKitTests;
 			sourceTree = "<group>";
@@ -165,7 +181,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E45C22F81B55D7E90014C344 /* configs */ = {
+		E45C22F81B55D7E90014C344 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
 				E45C22F91B55D8590014C344 /* AUTLogKit.xcconfig */,
@@ -174,7 +190,7 @@
 				E45C23051B55D86C0014C344 /* Carthage */,
 				E45C230E1B55D86C0014C344 /* iOS */,
 			);
-			name = configs;
+			name = Configuration;
 			sourceTree = "<group>";
 		};
 		E45C22FA1B55D86C0014C344 /* Base */ = {
@@ -438,10 +454,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E45C22F91B55D8590014C344 /* AUTLogKit.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 			};
 			name = Debug;
 		};
@@ -449,10 +461,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E45C22F91B55D8590014C344 /* AUTLogKit.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 			};
 			name = Release;
 		};
@@ -460,10 +468,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E45C23131B55D8A10014C344 /* AUTLogKitTests.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 			};
 			name = Debug;
 		};
@@ -471,10 +475,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E45C23131B55D8A10014C344 /* AUTLogKitTests.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 			};
 			name = Release;
 		};

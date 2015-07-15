@@ -9,9 +9,17 @@
 @import UIKit;
 @import CocoaLumberjack;
 
+NS_ASSUME_NONNULL_BEGIN
+
+/// A logger that invokes block whenever it logs.
 @interface DDStubLogger : DDAbstractLogger <DDLogger>
 
-- (instancetype)init;
-- (instancetype)initWithBlock:(void (^)(DDLogMessage*))logBlock NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE;
+
+/// Initializes a logger that invokes the logBlock when it logs a message with
+/// the contents of the message.
+- (instancetype)initWithLogBlock:(void (^)(DDLogMessage *))logBlock NS_DESIGNATED_INITIALIZER;
 
 @end
+
+NS_ASSUME_NONNULL_END

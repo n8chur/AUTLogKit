@@ -8,31 +8,36 @@
 
 #import "DDStubLogger.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface DDStubLogger ()
 
-@property (nonatomic, copy) void (^logBlock)(DDLogMessage*);
+@property (nonatomic, readonly, copy) void (^logBlock)(DDLogMessage *);
 
 @end
 
 @implementation DDStubLogger
 
 - (instancetype)init {
-    return [self initWithBlock:nil];
+    NSString *reason = [NSString stringWithFormat:@"Use designated initializer instead"];
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
 }
 
-- (instancetype)initWithBlock:(void (^)(DDLogMessage*))logBlock {
-    NSParameterAssert(logBlock);
+- (instancetype)initWithLogBlock:(void (^)(DDLogMessage*))logBlock {
+    NSParameterAssert(logBlock != nil);
     
     self = [super init];
-    if (self) {
-        _logBlock = [logBlock copy];
-    }
+    if (self == nil) return nil;
+
+    _logBlock = [logBlock copy];
     
     return self;
 }
 
 - (void)logMessage:(DDLogMessage *)logMessage {
-    (_logBlock)(logMessage);
+    self.logBlock(logMessage);
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

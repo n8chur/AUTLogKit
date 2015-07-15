@@ -18,7 +18,7 @@ __block DDStubLogger *stubLogger;
 
 beforeEach(^{
     lastLogs = [NSMutableArray array];
-    stubLogger = [[DDStubLogger alloc] initWithBlock:^(DDLogMessage *message) {
+    stubLogger = [[DDStubLogger alloc] initWithLogBlock:^(DDLogMessage *message) {
         [lastLogs addObject:message.message];
     }];
     [DDLog addLogger:stubLogger];
@@ -34,7 +34,7 @@ it(@"it should initially log nothing", ^{
     NSString *log = @"This is a log";
     AUTLogError(AUTLogKitTestContext, @"%@", log);
     
-    expect(lastLogs.count).will.equal(0);
+    expect(lastLogs).will.haveACountOf(0);
 });
 
 it(@"it should initially log errors", ^{
@@ -43,8 +43,8 @@ it(@"it should initially log errors", ^{
     NSString *log = @"This is a log";
     AUTLogError(AUTLogKitTestContext, @"%@", log);
     
-    expect(lastLogs.count).will.equal(1);
-    expect(lastLogs[0]).will.equal(log);
+    expect(lastLogs).will.haveACountOf(1);
+    expect(lastLogs.firstObject).will.equal(log);
 });
 
 it(@"it should initially log everything", ^{
@@ -56,22 +56,39 @@ it(@"it should initially log everything", ^{
     NSString *logInfo = @"This is a log info";
     AUTLogInfo(AUTLogKitTestContext, @"%@", logInfo);
     
-    expect(lastLogs.count).will.equal(2);
-    expect(lastLogs[0]).will.equal(logError);
-    expect(lastLogs[1]).will.equal(logInfo);
+    expect(lastLogs).will.haveACountOf(2);
+    expect(lastLogs.firstObject).will.equal(logError);
+    expect(lastLogs.lastObject).will.equal(logInfo);
 });
 
-it(@"it should log after level change", ^{
+it(@"it should log after level change from off to error", ^{
     struct AUTLogContext AUTLogKitTestContext = { .level = AUTLogLevelOff };
     
-    NSString *logError = @"This is a log error";
+    NSString *logError = @"This is a log error that will not be logged";
     AUTLogError(AUTLogKitTestContext, @"%@", logError);
     
     AUTLogContextSetLevel(&AUTLogKitTestContext, AUTLogLevelError);
+
+    NSString *anotherLogError = @"This is a log error that will be logged";
+    AUTLogError(AUTLogKitTestContext, @"%@", anotherLogError);
+    
+    expect(lastLogs).will.haveACountOf(1);
+    expect(lastLogs.firstObject).will.equal(anotherLogError);
+});
+
+it(@"it should stop logging after level change from error to off", ^{
+    struct AUTLogContext AUTLogKitTestContext = { .level = AUTLogLevelError };
+    
+    NSString *logError = @"This is a log error that will be logged";
     AUTLogError(AUTLogKitTestContext, @"%@", logError);
     
-    expect(lastLogs.count).will.equal(1);
-    expect(lastLogs[0]).will.equal(logError);
+    AUTLogContextSetLevel(&AUTLogKitTestContext, AUTLogLevelOff);
+
+    NSString *anotherLogError = @"This is a log error that will not be logged";
+    AUTLogError(AUTLogKitTestContext, @"%@", anotherLogError);
+    
+    expect(lastLogs).will.haveACountOf(1);
+    expect(lastLogs.firstObject).will.equal(logError);
 });
 
 SpecEnd
