@@ -11,8 +11,6 @@
 
 #import "AUTLog.h"
 
-AUTLogContext AUTLogContextGeneric = { .level = AUTLogLevelAll};
-
 bool AUTLogContextSetLevel(AUTLogContext* ctx, AUTLogLevel level) {
     return OSAtomicCompareAndSwapLong(ctx->level, level, (volatile long *)&(ctx->level));
 }

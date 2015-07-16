@@ -50,8 +50,3 @@ NSInteger AUTLogContextGetIdentifier(AUTLogContext *ctx);
 #define AUTLogError(ctx, frmt, ...) AUT_LOG_MAYBE(NO,                ctx, AUTLogFlagError, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 #define AUTLogInfo(ctx, frmt, ...)  AUT_LOG_MAYBE(LOG_ASYNC_ENABLED, ctx, AUTLogFlagInfo, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
-/// General ready to use log macros
-#define AUTLogGeneralError(frmt, ...) AUTLogError(AUTLogContextGeneric, ##__VA_ARGS__)
-#define AUTLogGeneralInfo(frmt, ...)  AUTLogInfo(AUTLogContextGeneric, ##__VA_ARGS__)
-
-extern AUTLogContext AUTLogContextGeneral;
