@@ -9,23 +9,23 @@
 #import <Specta/Specta.h>
 #import <Expecta/Expecta.h>
 #import <AUTLogKit/AUTLogKit.h>
-#import "DDStubLogger.h"
+#import "AUTBlockLogger.h"
 
 SpecBegin(AUTLog)
 
 __block NSMutableArray *lastLogs;
-__block DDStubLogger *stubLogger;
+__block AUTBlockLogger *blockBlogger;
 
 beforeEach(^{
     lastLogs = [NSMutableArray array];
-    stubLogger = [[DDStubLogger alloc] initWithLogBlock:^(DDLogMessage *message) {
+    blockBlogger = [[AUTBlockLogger alloc] initWithLogBlock:^(NSString *formattedMessage, DDLogMessage *message) {
         [lastLogs addObject:message.message];
     }];
-    [DDLog addLogger:stubLogger];
+    [DDLog addLogger:blockBlogger];
 });
 
 afterEach(^{
-    [DDLog removeLogger:stubLogger];
+    [DDLog removeLogger:blockBlogger];
 });
 
 it(@"it should initially log nothing", ^{
