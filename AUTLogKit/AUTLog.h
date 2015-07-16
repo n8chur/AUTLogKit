@@ -33,17 +33,25 @@ typedef struct AUTLogContext {
     volatile AUTLogLevel level;
 } AUTLogContext;
 
+/// A method to atomically set a log level for a given context.
+bool AUTLogContextSetLevel(AUTLogContext* ctx, AUTLogLevel level);
+
+/// A method to return a unique identifier for a given context
+NSInteger AUTLogContextGetIdentifier(AUTLogContext *ctx);
 
 /// Define version of the macro that only executes if the log level is above the threshold.
 /// The compiled versions essentially look like this:
 ///
 /// if (logFlagForThisLogMsg & logLevelForContext:XXX) { execute log message }
 #define AUT_LOG_MAYBE(async, ctx, flg, tag, fnct, frmt, ...) \
-        do { if(ctx.level & flg) LOG_MACRO(async, (DDLogLevel)ctx.level, (DDLogFlag)flg, (NSInteger)&ctx, tag, fnct, frmt, ##__VA_ARGS__); } while(0)
+        do { if(ctx.level & flg) LOG_MACRO(async, (DDLogLevel)ctx.level, (DDLogFlag)flg, AUTLogContextGetIdentifier(&ctx), tag, fnct, frmt, ##__VA_ARGS__); } while(0)
 
-/// Ready to use log macros with specific context.
+/// Ready to use context specific log macros.
 #define AUTLogError(ctx, frmt, ...) AUT_LOG_MAYBE(NO,                ctx, AUTLogFlagError, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 #define AUTLogInfo(ctx, frmt, ...)  AUT_LOG_MAYBE(LOG_ASYNC_ENABLED, ctx, AUTLogFlagInfo, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
-/// A method to atomically set a log level for a given context.
-extern bool AUTLogContextSetLevel(const AUTLogContext * const ctx, AUTLogLevel level);
+/// General ready to use log macros
+#define AUTLogGeneralError(frmt, ...) AUTLogError(AUTLogContextGeneric, ##__VA_ARGS__)
+#define AUTLogGeneralInfo(frmt, ...)  AUTLogInfo(AUTLogContextGeneric, ##__VA_ARGS__)
+
+extern AUTLogContext AUTLogContextGeneral;

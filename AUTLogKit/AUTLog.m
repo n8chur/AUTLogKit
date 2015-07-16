@@ -11,6 +11,12 @@
 
 #import "AUTLog.h"
 
-bool AUTLogContextSetLevel(const AUTLogContext * const ctx, AUTLogLevel level) {
-    return OSAtomicCompareAndSwapLong(ctx->level, level, (volatile long *)&ctx->level);
+AUTLogContext AUTLogContextGeneric = { .level = AUTLogLevelAll};
+
+bool AUTLogContextSetLevel(AUTLogContext* ctx, AUTLogLevel level) {
+    return OSAtomicCompareAndSwapLong(ctx->level, level, (volatile long *)&(ctx->level));
+}
+
+NSInteger AUTLogContextGetIdentifier(AUTLogContext *ctx) {
+    return (NSInteger)ctx;
 }
