@@ -47,6 +47,10 @@ NSInteger AUTLogContextGetIdentifier(AUTLogContext *ctx);
         do { if(ctx.level & flg) LOG_MACRO(async, (DDLogLevel)ctx.level, (DDLogFlag)flg, AUTLogContextGetIdentifier(&ctx), tag, fnct, frmt, ##__VA_ARGS__); } while(0)
 
 /// Ready to use context specific log macros.
-#define AUTLogError(ctx, frmt, ...) AUT_LOG_MAYBE(NO,                ctx, AUTLogFlagError, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
-#define AUTLogInfo(ctx, frmt, ...)  AUT_LOG_MAYBE(LOG_ASYNC_ENABLED, ctx, AUTLogFlagInfo, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
-
+///
+/// Macros are asynchronous for all flags. This prevents a deadlock inside
+/// CocoaLumberjack when a combination of synchronous vs asynchronous calls
+/// are used. This is at the expense of potentially missing some critical logs
+/// in the case of a crash.
+#define AUTLogError(ctx, frmt, ...) AUT_LOG_MAYBE(YES, ctx, AUTLogFlagError, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+#define AUTLogInfo(ctx, frmt, ...)  AUT_LOG_MAYBE(YES, ctx, AUTLogFlagInfo, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
