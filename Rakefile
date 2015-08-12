@@ -20,8 +20,7 @@ end
 
 task :archive do
     sh("carthage build #{CARTHAGE_ARCHIVE_FLAGS} | #{PRETTIFY}")
-
-    sh("zip -r #{ARCHIVE_PATH} #{PRODUCT_PATH}")
+    sh("carthage archive #{LIBRARY_NAME} --output #{ARCHIVE_PATH}")
 end
 
 task :increment_version do
