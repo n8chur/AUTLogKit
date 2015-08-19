@@ -404,7 +404,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "build_dir=\"$SRCROOT/Carthage/Build\"\n\n# If the build dir is not a symbolic link, continue\nif ! [ -L \"$build_dir\" ]; then exit 0; fi\n\ndest_dir=\"$build_dir/iOS\"\nframework_name=\"$PRODUCT_NAME.framework\"\n\nrm -rf \"$dest_dir/$framework_name\"\ncp -fR \"$BUILT_PRODUCTS_DIR/$framework_name\" \"$dest_dir\"";
+			shellScript = "build_dir=\"$SRCROOT/Carthage/Build\"\n\n# Only copy when the Carthage/Build directory is a symlink\nif ! [ -L \"$build_dir\" ]; then exit 0; fi\n\nrsync --delete -av \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME\"* \"$build_dir/iOS\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
