@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1004787F1B86961900ED5626 /* AUTLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1004787D1B86961900ED5626 /* AUTLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		100478801B86961900ED5626 /* AUTLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1004787E1B86961900ED5626 /* AUTLogFormatter.m */; };
+		100478821B869B9A00ED5626 /* AUTLogFormatterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 100478811B869B9A00ED5626 /* AUTLogFormatterSpec.m */; };
+		100478851B86A7E300ED5626 /* ReactiveCocoa.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 100478841B86A7E300ED5626 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		100478861B86A81900ED5626 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 100478841B86A7E300ED5626 /* ReactiveCocoa.framework */; };
 		E4273F911B5734F300F99513 /* AUTBlockLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = E45C232A1B56DFBB0014C344 /* AUTBlockLogger.m */; };
 		E45C22E21B55D6EC0014C344 /* AUTLogKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E45C22E11B55D6EC0014C344 /* AUTLogKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E45C22E81B55D6ED0014C344 /* AUTLogKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45C22DC1B55D6EC0014C344 /* AUTLogKit.framework */; };
@@ -40,6 +45,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				100478851B86A7E300ED5626 /* ReactiveCocoa.framework in Copy Frameworks */,
 				E45C23211B55DB7C0014C344 /* Expecta.framework in Copy Frameworks */,
 				E45C23221B55DB7C0014C344 /* Specta.framework in Copy Frameworks */,
 				E45C23231B55DB7C0014C344 /* CocoaLumberjack.framework in Copy Frameworks */,
@@ -50,6 +56,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1004787D1B86961900ED5626 /* AUTLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUTLogFormatter.h; sourceTree = "<group>"; };
+		1004787E1B86961900ED5626 /* AUTLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogFormatter.m; sourceTree = "<group>"; };
+		100478811B869B9A00ED5626 /* AUTLogFormatterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogFormatterSpec.m; sourceTree = "<group>"; };
+		100478841B86A7E300ED5626 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		E45C22DC1B55D6EC0014C344 /* AUTLogKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AUTLogKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E45C22E01B55D6EC0014C344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E45C22E11B55D6EC0014C344 /* AUTLogKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AUTLogKit.h; sourceTree = "<group>"; };
@@ -100,6 +110,7 @@
 				E45C22E81B55D6ED0014C344 /* AUTLogKit.framework in Frameworks */,
 				E45C23201B55DB730014C344 /* Specta.framework in Frameworks */,
 				E45C231F1B55DB730014C344 /* Expecta.framework in Frameworks */,
+				100478861B86A81900ED5626 /* ReactiveCocoa.framework in Frameworks */,
 				E45C23241B55DB830014C344 /* CocoaLumberjack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,6 +121,7 @@
 		3AEF94F11B56E69600559E77 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				100478811B869B9A00ED5626 /* AUTLogFormatterSpec.m */,
 				E45C23251B55E4830014C344 /* AUTLogSpec.m */,
 			);
 			name = Specs;
@@ -152,6 +164,8 @@
 				E45C22E11B55D6EC0014C344 /* AUTLogKit.h */,
 				E45C23141B55DA910014C344 /* AUTLog.h */,
 				E45C23271B55F3980014C344 /* AUTLog.m */,
+				1004787D1B86961900ED5626 /* AUTLogFormatter.h */,
+				1004787E1B86961900ED5626 /* AUTLogFormatter.m */,
 				E45C22DF1B55D6EC0014C344 /* Supporting Files */,
 			);
 			path = AUTLogKit;
@@ -278,6 +292,7 @@
 		E45C231A1B55DAC80014C344 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				100478841B86A7E300ED5626 /* ReactiveCocoa.framework */,
 				E45C231D1B55DB730014C344 /* Expecta.framework */,
 				E45C231E1B55DB730014C344 /* Specta.framework */,
 				E45C23181B55DAC20014C344 /* CocoaLumberjack.framework */,
@@ -295,6 +310,7 @@
 				E45C232B1B56DFBB0014C344 /* AUTBlockLogger.h in Headers */,
 				E45C23161B55DA910014C344 /* AUTLog.h in Headers */,
 				E45C22E21B55D6EC0014C344 /* AUTLogKit.h in Headers */,
+				1004787F1B86961900ED5626 /* AUTLogFormatter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +430,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E45C23281B55F3980014C344 /* AUTLog.m in Sources */,
+				100478801B86961900ED5626 /* AUTLogFormatter.m in Sources */,
 				E4273F911B5734F300F99513 /* AUTBlockLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,6 +440,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E45C23261B55E4830014C344 /* AUTLogSpec.m in Sources */,
+				100478821B869B9A00ED5626 /* AUTLogFormatterSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

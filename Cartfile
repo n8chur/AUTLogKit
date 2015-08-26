@@ -1,1 +1,5 @@
+# Internal
 github "CocoaLumberjack/CocoaLumberjack" ~> 2.0.0
+
+# External
+github "ReactiveCocoa/ReactiveCocoa" ~> 2.5

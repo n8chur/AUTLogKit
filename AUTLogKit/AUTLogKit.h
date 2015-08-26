@@ -16,3 +16,4 @@ FOUNDATION_EXPORT const unsigned char AUTLogKitVersionString[];
 
 #import <AUTLogKit/AUTLog.h>
 #import <AUTLogKit/AUTBlockLogger.h>
+#import <AUTLogKit/AUTLogFormatter.h>
