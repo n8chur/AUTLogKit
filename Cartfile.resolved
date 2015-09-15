@@ -1,5 +1,5 @@
-github "CocoaLumberjack/CocoaLumberjack" "2.0.1"
+github "CocoaLumberjack/CocoaLumberjack" "479279f102a8ab23084290697bafa77aac0d1bdf"
 github "ReactiveCocoa/ReactiveCocoa" "v2.5"
-github "specta/expecta" "v1.0.2"
-github "specta/specta" "v1.0.3"
+github "specta/expecta" "v1.0.3"
+github "specta/specta" "c4bde15c321ef83e5a94c5a5d9dd7ac2f5c05b07"
 github "jspahrsummers/xcconfigs" "0.8.1"
