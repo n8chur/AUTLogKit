@@ -23,6 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation AUTLogFormatter
 
+
+- (instancetype)init {
+    return [self initWithDateFormatter:nil options:AUTLogFormatterOutputOptionsClient includingLevelsByContext:nil];
+}
+
 - (instancetype)initWithOptions:(AUTLogFormatterOutputOptions)options {
     return [self initWithDateFormatter:nil options:options];
 }
