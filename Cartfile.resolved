@@ -1,4 +1,4 @@
-github "CocoaLumberjack/CocoaLumberjack" "479279f102a8ab23084290697bafa77aac0d1bdf"
+github "automatic/CocoaLumberjack" "15ec73306870f1256fba1a3d6213030c2b62b43d"
 github "ReactiveCocoa/ReactiveCocoa" "v2.5"
 github "specta/expecta" "v1.0.3"
 github "specta/specta" "c4bde15c321ef83e5a94c5a5d9dd7ac2f5c05b07"

@@ -1,2 +1,2 @@
-github "CocoaLumberjack/CocoaLumberjack" "479279f102a8ab23084290697bafa77aac0d1bdf"
+github "automatic/CocoaLumberjack" "fix-version"
 github "ReactiveCocoa/ReactiveCocoa" ~> 2.5

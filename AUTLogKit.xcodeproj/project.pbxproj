@@ -74,11 +74,6 @@
 		E45C23021B55D86C0014C344 /* Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Application.xcconfig; sourceTree = "<group>"; };
 		E45C23031B55D86C0014C344 /* Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Framework.xcconfig; sourceTree = "<group>"; };
 		E45C23041B55D86C0014C344 /* StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = StaticLibrary.xcconfig; sourceTree = "<group>"; };
-		E45C23081B55D86C0014C344 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = "<group>"; };
-		E45C23091B55D86C0014C344 /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
-		E45C230A1B55D86C0014C344 /* NSLogRouter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NSLogRouter.framework; sourceTree = "<group>"; };
-		E45C230C1B55D86C0014C344 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = "<group>"; };
-		E45C230D1B55D86C0014C344 /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 		E45C230F1B55D86C0014C344 /* iOS-Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-Application.xcconfig"; sourceTree = "<group>"; };
 		E45C23101B55D86C0014C344 /* iOS-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-Base.xcconfig"; sourceTree = "<group>"; };
 		E45C23111B55D86C0014C344 /* iOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-Framework.xcconfig"; sourceTree = "<group>"; };
@@ -202,7 +197,6 @@
 				E45C22F91B55D8590014C344 /* AUTLogKit.xcconfig */,
 				E45C23131B55D8A10014C344 /* AUTLogKitTests.xcconfig */,
 				E45C22FA1B55D86C0014C344 /* Base */,
-				E45C23051B55D86C0014C344 /* Carthage */,
 				E45C230E1B55D86C0014C344 /* iOS */,
 			);
 			name = Configuration;
@@ -238,43 +232,6 @@
 				E45C23041B55D86C0014C344 /* StaticLibrary.xcconfig */,
 			);
 			path = Targets;
-			sourceTree = "<group>";
-		};
-		E45C23051B55D86C0014C344 /* Carthage */ = {
-			isa = PBXGroup;
-			children = (
-				E45C23061B55D86C0014C344 /* Build */,
-			);
-			name = Carthage;
-			path = Carthage/Checkouts/xcconfigs/Carthage;
-			sourceTree = "<group>";
-		};
-		E45C23061B55D86C0014C344 /* Build */ = {
-			isa = PBXGroup;
-			children = (
-				E45C23071B55D86C0014C344 /* iOS */,
-				E45C230B1B55D86C0014C344 /* Mac */,
-			);
-			path = Build;
-			sourceTree = "<group>";
-		};
-		E45C23071B55D86C0014C344 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				E45C23081B55D86C0014C344 /* CocoaLumberjack.framework */,
-				E45C23091B55D86C0014C344 /* CocoaLumberjackSwift.framework */,
-				E45C230A1B55D86C0014C344 /* NSLogRouter.framework */,
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
-		E45C230B1B55D86C0014C344 /* Mac */ = {
-			isa = PBXGroup;
-			children = (
-				E45C230C1B55D86C0014C344 /* CocoaLumberjack.framework */,
-				E45C230D1B55D86C0014C344 /* CocoaLumberjackSwift.framework */,
-			);
-			path = Mac;
 			sourceTree = "<group>";
 		};
 		E45C230E1B55D86C0014C344 /* iOS */ = {
