@@ -1,2 +1,2 @@
-github "automatic/CocoaLumberjack" "fix-version"
+github "CocoaLumberjack/CocoaLumberjack" ~> 2.1.0
 github "ReactiveCocoa/ReactiveCocoa" ~> 2.5
