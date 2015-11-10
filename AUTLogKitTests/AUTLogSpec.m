@@ -11,10 +11,39 @@
 #import <AUTLogKit/AUTLogKit.h>
 #import "AUTBlockLogger.h"
 
+#import "AUTLog_Private.h"
+
 SpecBegin(AUTLog)
 
 __block NSMutableArray *lastLogs;
 __block AUTBlockLogger *blockBlogger;
+
+beforeEach(^{
+    AUTLogContextResetRegisteredContexts();
+});
+
+describe(@"register context", ^{
+    it(@"should have no registered contexts initially", ^{
+        NSArray *contexts = AUTLogContextRegisteredContexts();
+        expect(contexts.count).to.equal(0);
+    });
+    
+    it(@"should register a context with a default name", ^{
+        AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext, AUTLogLevelOff);
+        NSArray *contexts = AUTLogContextRegisteredContexts();
+        expect(contexts.count).to.equal(1);
+        expect(contexts.firstObject).to.equal(@(AUTLogContextGetIdentifier(AUTLogKitTestContext)));
+    });
+    
+    it(@"should not return a valid context", ^{
+        expect(AUTLogContextGetContext(2)).to.beNil();
+    });
+    
+    it(@"should return a valid context", ^{
+        AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext, AUTLogLevelOff);
+        expect(AUTLogContextGetContext(AUTLogContextGetIdentifier(AUTLogKitTestContext))).to.equal(AUTLogKitTestContext);
+    });
+});
 
 describe(@"change log filters using contexts and log levels", ^{
     beforeEach(^{
@@ -30,7 +59,7 @@ describe(@"change log filters using contexts and log levels", ^{
     });
 
     it(@"it should initially log nothing", ^{
-        struct AUTLogContext AUTLogKitTestContext = { .level = AUTLogLevelOff };
+        AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext, AUTLogLevelOff);
 
         NSString *log = @"This is a log";
         AUTLogError(AUTLogKitTestContext, @"%@", log);
@@ -39,7 +68,7 @@ describe(@"change log filters using contexts and log levels", ^{
     });
 
     it(@"it should initially log errors", ^{
-        struct AUTLogContext AUTLogKitTestContext = { .level = AUTLogLevelError };
+        AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext, AUTLogLevelError);
 
         NSString *log = @"This is a log";
         AUTLogError(AUTLogKitTestContext, @"%@", log);
@@ -49,7 +78,7 @@ describe(@"change log filters using contexts and log levels", ^{
     });
 
     it(@"it should initially log everything", ^{
-        struct AUTLogContext AUTLogKitTestContext = { .level = AUTLogLevelAll };
+        AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext, AUTLogLevelAll);
         
         NSString *logError = @"This is a log error";
         AUTLogError(AUTLogKitTestContext, @"%@", logError);
@@ -63,12 +92,12 @@ describe(@"change log filters using contexts and log levels", ^{
     });
 
     it(@"it should log after level change from off to error", ^{
-        struct AUTLogContext AUTLogKitTestContext = { .level = AUTLogLevelOff };
+        AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext, AUTLogLevelOff);
         
         NSString *logError = @"This is a log error that will not be logged";
         AUTLogError(AUTLogKitTestContext, @"%@", logError);
         
-        AUTLogContextSetLevel(&AUTLogKitTestContext, AUTLogLevelError);
+        AUTLogContextSetLevel(AUTLogKitTestContext, AUTLogLevelError);
 
         NSString *anotherLogError = @"This is a log error that will be logged";
         AUTLogError(AUTLogKitTestContext, @"%@", anotherLogError);
@@ -78,12 +107,12 @@ describe(@"change log filters using contexts and log levels", ^{
     });
 
     it(@"it should stop logging after level change from error to off", ^{
-        struct AUTLogContext AUTLogKitTestContext = { .level = AUTLogLevelError };
+        AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext, AUTLogLevelError);
         
         NSString *logError = @"This is a log error that will be logged";
         AUTLogError(AUTLogKitTestContext, @"%@", logError);
         
-        AUTLogContextSetLevel(&AUTLogKitTestContext, AUTLogLevelOff);
+        AUTLogContextSetLevel(AUTLogKitTestContext, AUTLogLevelOff);
 
         NSString *anotherLogError = @"This is a log error that will not be logged";
         AUTLogError(AUTLogKitTestContext, @"%@", anotherLogError);
@@ -95,18 +124,18 @@ describe(@"change log filters using contexts and log levels", ^{
 
 describe(@"check setting log levels", ^{
     it(@"should change log level", ^{
-        struct AUTLogContext AUTLogKitTestContext = { .level = AUTLogLevelOff };
+        AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext, AUTLogLevelOff);
         
-        AUTLogContextSetLevel(&AUTLogKitTestContext, AUTLogLevelError);
-        expect(AUTLogKitTestContext.level).to.equal(AUTLogLevelError);
+        AUTLogContextSetLevel(AUTLogKitTestContext, AUTLogLevelError);
+        expect(AUTLogContextGetLevel(AUTLogKitTestContext)).to.equal(AUTLogLevelError);
     });
     
     it(@"should have a different unique identifier", ^{
-        struct AUTLogContext AUTLogKitTestContext1 = { .level = AUTLogLevelOff };
-        struct AUTLogContext AUTLogKitTestContext2 = { .level = AUTLogLevelOff };
+        AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext1, AUTLogLevelOff);
+        AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext2, AUTLogLevelOff);
         
-        NSUInteger AUTLogKitTestContext1Identifier = AUTLogContextGetIdentifier(&AUTLogKitTestContext1);
-        NSUInteger AUTLogKitTestContext2Identifier = AUTLogContextGetIdentifier(&AUTLogKitTestContext2);
+        NSInteger AUTLogKitTestContext1Identifier = AUTLogContextGetIdentifier(AUTLogKitTestContext1);
+        NSInteger AUTLogKitTestContext2Identifier = AUTLogContextGetIdentifier(AUTLogKitTestContext2);
         
         expect(AUTLogKitTestContext1Identifier).notTo.equal(AUTLogKitTestContext2Identifier);
     });

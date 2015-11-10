@@ -9,6 +9,8 @@
 @import Foundation;
 @import CocoaLumberjack;
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef const void *AUTLogContextIdentifier;
 
 typedef NS_OPTIONS(NSUInteger, AUTLogFlag) {
@@ -27,24 +29,38 @@ typedef NS_OPTIONS(NSUInteger, AUTLogLevel) {
 ///
 /// For example, all logs related to network connections could be grouped into
 /// a context.
-typedef struct AUTLogContext {
-     /// A log level for this context. Can be initialized with a default value.
-     /// Use AUTSetContextLevel to set afterwards to ensure thread safety.
-    volatile AUTLogLevel level;
-} AUTLogContext;
+typedef struct AUTLogContext AUTLogContext;
+
+/// Create a new context
+AUTLogContext *AUTLogContextCreate(AUTLogLevel level, const char *name);
 
 /// A method to atomically set a log level for a given context.
-bool AUTLogContextSetLevel(AUTLogContext* ctx, AUTLogLevel level);
+bool AUTLogContextSetLevel(AUTLogContext *ctx, AUTLogLevel level);
 
 /// A method to return a unique identifier for a given context
 NSInteger AUTLogContextGetIdentifier(AUTLogContext *ctx);
+
+/// A method to return log level for a given context
+AUTLogLevel AUTLogContextGetLevel(AUTLogContext *ctx);
+
+/// A method to return the name for a given context
+NSString * AUTLogContextGetName(AUTLogContext *ctx);
+
+/// Return a context given a valid context identifier or nil otherwise.
+AUTLogContext * __nullable AUTLogContextGetContext(NSInteger contextIdentifier);
+
+/// A method that returns all registered contexts identifiers.
+NSArray<NSNumber *> * AUTLogContextRegisteredContexts();
+
+/// A method to register a context
+void AUTLogContextRegisterContext(AUTLogContext *context);
 
 /// Define version of the macro that only executes if the log level is above the threshold.
 /// The compiled versions essentially look like this:
 ///
 /// if (logFlagForThisLogMsg & logLevelForContext:XXX) { execute log message }
 #define AUT_LOG_MAYBE(async, ctx, flg, tag, fnct, frmt, ...) \
-        do { if(ctx.level & flg) LOG_MACRO(async, (DDLogLevel)ctx.level, (DDLogFlag)flg, AUTLogContextGetIdentifier(&ctx), tag, fnct, frmt, ##__VA_ARGS__); } while(0)
+        do { if(AUTLogContextGetLevel(ctx) & flg) LOG_MACRO(async, (DDLogLevel)AUTLogContextGetLevel(ctx), (DDLogFlag)flg, AUTLogContextGetIdentifier(ctx), tag, fnct, frmt, ##__VA_ARGS__); } while(0)
 
 /// Ready to use context specific log macros.
 ///
@@ -54,3 +70,22 @@ NSInteger AUTLogContextGetIdentifier(AUTLogContext *ctx);
 /// in the case of a crash.
 #define AUTLogError(ctx, frmt, ...) AUT_LOG_MAYBE(YES, ctx, AUTLogFlagError, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 #define AUTLogInfo(ctx, frmt, ...)  AUT_LOG_MAYBE(YES, ctx, AUTLogFlagInfo, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+
+/// A macro to define a given context in a header file as extern.
+#define AUTLOGKIT_CONTEXT_DECLARE(ctx) extern AUTLogContext *ctx;
+
+/// A macro to initialize a given context in an implementation file passing
+/// a level. The context name will default to the context variable name.
+#define AUTLOGKIT_CONTEXT_INIT(ctx, level) AUTLOGKIT_CONTEXT_INIT_WITH_NAME(ctx, level, #ctx)
+
+/// A macro to initialize a given context in an implementation file passing
+/// a default level and a context name, automatically registering it at load
+/// time using static method.
+#define AUTLOGKIT_CONTEXT_INIT_WITH_NAME(ctx, level, name) \
+    AUTLogContext *ctx; \
+    __attribute__((constructor)) static void Register_##ctx(void) { \
+        ctx = AUTLogContextCreate(level, name); \
+        AUTLogContextRegisterContext(ctx); \
+    }
+
+NS_ASSUME_NONNULL_END

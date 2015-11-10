@@ -11,9 +11,15 @@
 @import ReactiveCocoa;
 @import AUTLogKit;
 
+#import "AUTLog_Private.h"
+
 #import "AUTLogFormatter.h"
 
 SpecBegin(AUTLogFormatter)
+
+NSString * (^contextPrefixedLog)(NSString *log, AUTLogContext *context) = ^ NSString * (NSString *log, AUTLogContext *context) {
+    return [NSString stringWithFormat:@"%@: %@", AUTLogContextGetName(context), log];
+};
 
 __block NSError *error;
 __block AUTLogFormatter *logFormatter;
@@ -108,6 +114,17 @@ it(@"should not prepend date", ^{
     
     NSString *formattedMessage = [logFormatter formatLogMessage:logMessage];
     expect(formattedMessage).equal(message);
+});
+
+it(@"should prepend context name", ^{
+    AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext, AUTLogLevelAll);
+    
+    NSString *message = @"foo";
+    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsServer];
+    DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:message level:DDLogLevelInfo flag:DDLogFlagInfo context:AUTLogContextGetIdentifier(AUTLogKitTestContext) file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
+    
+    NSString *formattedMessage = [logFormatter formatLogMessage:logMessage];
+    expect(formattedMessage).equal(contextPrefixedLog(message, AUTLogKitTestContext));
 });
 
 SpecEnd

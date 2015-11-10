@@ -26,6 +26,7 @@
 		E45C23261B55E4830014C344 /* AUTLogSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E45C23251B55E4830014C344 /* AUTLogSpec.m */; };
 		E45C23281B55F3980014C344 /* AUTLog.m in Sources */ = {isa = PBXBuildFile; fileRef = E45C23271B55F3980014C344 /* AUTLog.m */; };
 		E45C232B1B56DFBB0014C344 /* AUTBlockLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = E45C23291B56DFBB0014C344 /* AUTBlockLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E4DA10001BF139F000E98C3F /* AUTLog_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E4DA0FFF1BF1394300E98C3F /* AUTLog_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		E45C23271B55F3980014C344 /* AUTLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLog.m; sourceTree = "<group>"; };
 		E45C23291B56DFBB0014C344 /* AUTBlockLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUTBlockLogger.h; path = ../AUTLogKit/AUTBlockLogger.h; sourceTree = "<group>"; };
 		E45C232A1B56DFBB0014C344 /* AUTBlockLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AUTBlockLogger.m; path = ../AUTLogKit/AUTBlockLogger.m; sourceTree = "<group>"; };
+		E4DA0FFF1BF1394300E98C3F /* AUTLog_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AUTLog_Private.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				1004787D1B86961900ED5626 /* AUTLogFormatter.h */,
 				1004787E1B86961900ED5626 /* AUTLogFormatter.m */,
 				E45C22DF1B55D6EC0014C344 /* Supporting Files */,
+				E4DA0FFF1BF1394300E98C3F /* AUTLog_Private.h */,
 			);
 			path = AUTLogKit;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			files = (
 				E45C232B1B56DFBB0014C344 /* AUTBlockLogger.h in Headers */,
 				E45C23161B55DA910014C344 /* AUTLog.h in Headers */,
+				E4DA10001BF139F000E98C3F /* AUTLog_Private.h in Headers */,
 				E45C22E21B55D6EC0014C344 /* AUTLogKit.h in Headers */,
 				1004787F1B86961900ED5626 /* AUTLogFormatter.h in Headers */,
 			);

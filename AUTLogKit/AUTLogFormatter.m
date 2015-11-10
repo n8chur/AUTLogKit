@@ -77,6 +77,11 @@ NS_ASSUME_NONNULL_BEGIN
     if (![self shouldLogMessage:logMessage]) return nil;
     
     NSString *output = [logMessage.message copy];
+    
+    // Prepend context name
+    if (logMessage.context && AUTLogContextGetContext(logMessage.context) != nil) {
+        output = [NSString stringWithFormat:@"%@: %@", AUTLogContextGetName((AUTLogContext *)logMessage.context), output];
+    }
  
     if (self.options == AUTLogFormatterOutputOptionsClient) {
         NSString *dateAndTime = [self.dateFormatter stringFromDate:logMessage.timestamp];
@@ -96,8 +101,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     NSNumber *level = self.includedLevelsByContextIdentifiers[@(logMessage.context)];
 
-    // If no level was specified for the given context, it should not be
-    // logged.
+    // If no level was specified for the given context, it should not be logged.
     if (level == nil) return NO;
 
     // If the message's flag is found within the level mask, it should be logged.
