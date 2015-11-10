@@ -12,14 +12,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define AUTLOGKIT_CONTEXT_CREATE(ctx, level) AUTLOGKIT_CONTEXT_CREATE_WITH_NAME(ctx, level, #ctx)
 
-#define AUTLOGKIT_CONTEXT_CREATE_WITH_NAME(ctx, level, name) \
-    AUTLogContext *ctx; \
-    do { \
-        ctx = AUTLogContextCreate(level, name); \
-        AUTLogContextRegisterContext(ctx); \
-    } while (0)
+/// A macro to create and register a log context within the context of a method.
+/// Only used for testing purposes.
+#define AUTLOGKIT_CONTEXT_CREATE_WITH_NAME(_ctx, _level, _name) \
+    AUTLogContext *_ctx = [[AUTLogContext alloc] initWithName:@(_name) level:_level];
 
-/// A method to reset list of previously registered contexts
-void AUTLogContextResetRegisteredContexts();
+@interface AUTLogContext (ResetContexts)
+
+/// A method to reset list of previously registered contexts. Only used for
+/// testing purposes.
++ (void)resetRegisteredContexts;
+
+@end
 
 NS_ASSUME_NONNULL_END

@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef const void *AUTLogContextIdentifier;
+typedef NSInteger AUTLogContextIdentifier;
 
 typedef NS_OPTIONS(NSUInteger, AUTLogFlag) {
     AUTLogFlagError      = DDLogFlagError, // 0...00001
@@ -29,38 +29,38 @@ typedef NS_OPTIONS(NSUInteger, AUTLogLevel) {
 ///
 /// For example, all logs related to network connections could be grouped into
 /// a context.
-typedef struct AUTLogContext AUTLogContext;
 
-/// Create a new context
-AUTLogContext *AUTLogContextCreate(AUTLogLevel level, const char *name);
+@interface AUTLogContext : NSObject
 
-/// A method to atomically set a log level for a given context.
-bool AUTLogContextSetLevel(AUTLogContext *ctx, AUTLogLevel level);
+/// A log level for this context.
+@property (atomic, assign) AUTLogLevel level;
 
-/// A method to return a unique identifier for a given context
-NSInteger AUTLogContextGetIdentifier(AUTLogContext *ctx);
+/// Human readable name for this context.
+@property (readonly, atomic, copy) NSString *name;
 
-/// A method to return log level for a given context
-AUTLogLevel AUTLogContextGetLevel(AUTLogContext *ctx);
+/// A unique identifier representing this context.
+@property (readonly, atomic, assign) AUTLogContextIdentifier identifier;
 
-/// A method to return the name for a given context
-NSString * AUTLogContextGetName(AUTLogContext *ctx);
+- (instancetype)init NS_UNAVAILABLE;
 
-/// Return a context given a valid context identifier or nil otherwise.
-AUTLogContext * __nullable AUTLogContextGetContext(NSInteger contextIdentifier);
+/// Create a context by name and level automatically registering it. The list
+/// of registered contexts can be retrieved using `registeredContexts`.
+- (instancetype)initWithName:(NSString *)name level:(AUTLogLevel)level NS_DESIGNATED_INITIALIZER;
 
-/// A method that returns all registered contexts identifiers.
-NSArray<NSNumber *> * AUTLogContextRegisteredContexts();
+/// Returns a list of previously registered contexts
++ (NSArray<AUTLogContext *> *)registeredContexts;
 
-/// A method to register a context
-void AUTLogContextRegisterContext(AUTLogContext *context);
+/// Returns a context given its identifier, nil if invalid.
++ (nullable AUTLogContext *)contextForIdentifier:(AUTLogContextIdentifier)identifier;
+
+@end
 
 /// Define version of the macro that only executes if the log level is above the threshold.
 /// The compiled versions essentially look like this:
 ///
 /// if (logFlagForThisLogMsg & logLevelForContext:XXX) { execute log message }
 #define AUT_LOG_MAYBE(async, ctx, flg, tag, fnct, frmt, ...) \
-        do { if(AUTLogContextGetLevel(ctx) & flg) LOG_MACRO(async, (DDLogLevel)AUTLogContextGetLevel(ctx), (DDLogFlag)flg, AUTLogContextGetIdentifier(ctx), tag, fnct, frmt, ##__VA_ARGS__); } while(0)
+    do { if(ctx.level & flg) LOG_MACRO(async, (DDLogLevel)ctx.level, (DDLogFlag)flg, ctx.identifier, tag, fnct, frmt, ##__VA_ARGS__); } while(0)
 
 /// Ready to use context specific log macros.
 ///
@@ -75,17 +75,19 @@ void AUTLogContextRegisterContext(AUTLogContext *context);
 #define AUTLOGKIT_CONTEXT_DECLARE(ctx) extern AUTLogContext *ctx;
 
 /// A macro to initialize a given context in an implementation file passing
-/// a level. The context name will default to the context variable name.
-#define AUTLOGKIT_CONTEXT_INIT(ctx, level) AUTLOGKIT_CONTEXT_INIT_WITH_NAME(ctx, level, #ctx)
-
-/// A macro to initialize a given context in an implementation file passing
 /// a default level and a context name, automatically registering it at load
-/// time using static method.
-#define AUTLOGKIT_CONTEXT_INIT_WITH_NAME(ctx, level, name) \
+/// time.
+#define AUTLOGKIT_CONTEXT_INIT(ctx, _level, name) \
     AUTLogContext *ctx; \
-    __attribute__((constructor)) static void Register_##ctx(void) { \
-        ctx = AUTLogContextCreate(level, name); \
-        AUTLogContextRegisterContext(ctx); \
-    }
+    @interface AUTLogContext ## ctx : AUTLogContext \
+    @end \
+    @implementation AUTLogContext ## ctx \
+        + (void)load { \
+            static dispatch_once_t onceToken; \
+            dispatch_once(&onceToken, ^{ \
+                ctx = [[AUTLogContext alloc] initWithName:@(name) level:_level]; \
+            }); \
+        } \
+    @end
 
 NS_ASSUME_NONNULL_END

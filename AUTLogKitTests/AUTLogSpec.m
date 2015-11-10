@@ -19,29 +19,34 @@ __block NSMutableArray *lastLogs;
 __block AUTBlockLogger *blockBlogger;
 
 beforeEach(^{
-    AUTLogContextResetRegisteredContexts();
+    [AUTLogContext resetRegisteredContexts];
 });
 
 describe(@"register context", ^{
     it(@"should have no registered contexts initially", ^{
-        NSArray *contexts = AUTLogContextRegisteredContexts();
+        NSArray *contexts = [AUTLogContext registeredContexts];
         expect(contexts.count).to.equal(0);
     });
     
-    it(@"should register a context with a default name", ^{
-        AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext, AUTLogLevelOff);
-        NSArray *contexts = AUTLogContextRegisteredContexts();
-        expect(contexts.count).to.equal(1);
-        expect(contexts.firstObject).to.equal(@(AUTLogContextGetIdentifier(AUTLogKitTestContext)));
-    });
-    
     it(@"should not return a valid context", ^{
-        expect(AUTLogContextGetContext(2)).to.beNil();
+        expect([AUTLogContext contextForIdentifier:2]).to.beNil();
     });
     
     it(@"should return a valid context", ^{
         AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext, AUTLogLevelOff);
-        expect(AUTLogContextGetContext(AUTLogContextGetIdentifier(AUTLogKitTestContext))).to.equal(AUTLogKitTestContext);
+        expect([AUTLogContext contextForIdentifier:AUTLogKitTestContext.identifier]).to.equal(AUTLogKitTestContext);
+    });
+    
+    it(@"should fail when creating a context when a context already exists with the same name", ^{
+        AUTLOGKIT_CONTEXT_CREATE_WITH_NAME(AUTLogKitTestContext, AUTLogLevelOff, "foo");
+        
+        expect([AUTLogContext contextForIdentifier:AUTLogKitTestContext.identifier]).to.equal(AUTLogKitTestContext);
+        
+        expect(^{
+            AUTLOGKIT_CONTEXT_CREATE_WITH_NAME(AUTLogKitTestContextOther, AUTLogLevelOff, "foo");
+            
+            expect([AUTLogContext contextForIdentifier:AUTLogKitTestContextOther.identifier]).to.equal(AUTLogKitTestContextOther);
+        }).to.raise(NSInternalInconsistencyException);
     });
 });
 
@@ -97,7 +102,7 @@ describe(@"change log filters using contexts and log levels", ^{
         NSString *logError = @"This is a log error that will not be logged";
         AUTLogError(AUTLogKitTestContext, @"%@", logError);
         
-        AUTLogContextSetLevel(AUTLogKitTestContext, AUTLogLevelError);
+        AUTLogKitTestContext.level = AUTLogLevelError;
 
         NSString *anotherLogError = @"This is a log error that will be logged";
         AUTLogError(AUTLogKitTestContext, @"%@", anotherLogError);
@@ -112,7 +117,7 @@ describe(@"change log filters using contexts and log levels", ^{
         NSString *logError = @"This is a log error that will be logged";
         AUTLogError(AUTLogKitTestContext, @"%@", logError);
         
-        AUTLogContextSetLevel(AUTLogKitTestContext, AUTLogLevelOff);
+        AUTLogKitTestContext.level = AUTLogLevelOff;
 
         NSString *anotherLogError = @"This is a log error that will not be logged";
         AUTLogError(AUTLogKitTestContext, @"%@", anotherLogError);
@@ -126,16 +131,17 @@ describe(@"check setting log levels", ^{
     it(@"should change log level", ^{
         AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext, AUTLogLevelOff);
         
-        AUTLogContextSetLevel(AUTLogKitTestContext, AUTLogLevelError);
-        expect(AUTLogContextGetLevel(AUTLogKitTestContext)).to.equal(AUTLogLevelError);
+        AUTLogKitTestContext.level = AUTLogLevelError;
+        
+        expect(AUTLogKitTestContext.level).to.equal(AUTLogLevelError);
     });
     
     it(@"should have a different unique identifier", ^{
         AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext1, AUTLogLevelOff);
         AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext2, AUTLogLevelOff);
         
-        NSInteger AUTLogKitTestContext1Identifier = AUTLogContextGetIdentifier(AUTLogKitTestContext1);
-        NSInteger AUTLogKitTestContext2Identifier = AUTLogContextGetIdentifier(AUTLogKitTestContext2);
+        NSInteger AUTLogKitTestContext1Identifier = AUTLogKitTestContext1.identifier;
+        NSInteger AUTLogKitTestContext2Identifier = AUTLogKitTestContext2.identifier;
         
         expect(AUTLogKitTestContext1Identifier).notTo.equal(AUTLogKitTestContext2Identifier);
     });

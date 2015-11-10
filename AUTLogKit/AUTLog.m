@@ -10,84 +10,86 @@
 #import <libkern/OSAtomic.h>
 
 #import "AUTLog.h"
+#import "AUTLog_Private.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// A dictionary representing the context identifiers mapped by the
-/// corresponding context name.
-/// In order to simplify thread synchronization, this object should only be
-/// accessed from the main thread.
+/// A dictionary representing the context identifiers mapped by their
+/// corresponding context name to ensure only one context can have a given name.
 static NSMutableDictionary<NSString *, NSNumber *> *registeredContexts;
 
-struct AUTLogContext {
-    // A log level for this context that can be changed atomically using the
-    // AUTLogContextSetLevel function.
-    volatile AUTLogLevel level;
-    // Human readable name for this context that can be changed using the
-    // AUTLogContextSetName function.
-    const char *name;
-};
+@interface AUTLogContext ()
 
-AUTLogContext * AUTLogContextCreate(AUTLogLevel level, const char *name) {
-    AUTLogContext *ctx = malloc(sizeof(AUTLogContext));
-    ctx->level = level;
-    ctx->name = strdup(name);
-    return ctx;
-}
+@property (readwrite, atomic, copy) NSString *name;
 
-bool AUTLogContextSetLevel(AUTLogContext* ctx, AUTLogLevel level) {
-    return OSAtomicCompareAndSwapLong(ctx->level, level, (volatile long *)&(ctx->level));
-}
+@end
 
-NSInteger AUTLogContextGetIdentifier(AUTLogContext *ctx) {
-    return (NSInteger)ctx;
-}
+@implementation AUTLogContext
 
-NSString * AUTLogContextGetName(AUTLogContext *ctx) {
-    return [NSString stringWithUTF8String:ctx->name];
-}
-
-AUTLogLevel AUTLogContextGetLevel(AUTLogContext *ctx) {
-    return ctx->level;
-}
-
-void AUTLogContextRegisterContext(AUTLogContext *context) {
-    NSCAssert(NSThread.isMainThread, @"AUTLogContextRegisterContext must be invoked from the main thread");
-    
-    if (registeredContexts == nil) {
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         registeredContexts = [NSMutableDictionary dictionary];
+    });
+}
+
+- (instancetype)init {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Use the designated initializer instead" userInfo:nil];
+}
+
+- (instancetype)initWithName:(NSString *)name level:(AUTLogLevel)level {
+    NSParameterAssert(name != NULL);
+
+    @synchronized(registeredContexts) {
+        // Assert if another context was already registered with same name
+        NSAssert(registeredContexts[name] == nil, @"Context '%@' already registered", name);
+        
+        self = [super init];
+        
+        _level = level;
+        _name = [name copy];
+        
+        registeredContexts[name] = @(self.identifier);
+        
+        return self;
     }
-    NSString *contextName = AUTLogContextGetName(context);
-    
-    // Assert if another context was already registered with same name
-    NSCAssert(registeredContexts[contextName] == nil, @"Context '%@' already registered", contextName);
-    
-    registeredContexts[contextName] = @(AUTLogContextGetIdentifier(context));
 }
 
-AUTLogContext * __nullable AUTLogContextGetContext(NSInteger contextIdentifier) {
-    NSCAssert(NSThread.isMainThread, @"AUTLogContextGetContext must be invoked from the main thread");
-    
-    // Verify the context identifier is a valid context and not an arbitrary
-    // value set on a LogMessage
-    if (![registeredContexts.allValues containsObject:@(contextIdentifier)]) return nil;
-    
-    return (AUTLogContext *)contextIdentifier;
+- (AUTLogContextIdentifier)identifier {
+    return (AUTLogContextIdentifier)self;
 }
 
-NSArray * AUTLogContextRegisteredContexts() {
-    NSCAssert(NSThread.isMainThread, @"AUTLogContextRegisteredContexts must be invoked from the main thread");
-    
-    if (registeredContexts == nil) {
++ (nullable AUTLogContext *)contextForIdentifier:(AUTLogContextIdentifier)identifier {
+    @synchronized(registeredContexts) {
+        // Verify the context identifier is a valid context and not an arbitrary
+        // value.
+        if (![registeredContexts.allValues containsObject:@(identifier)]) return nil;
+        
+        return (__bridge AUTLogContext *)(void *)identifier;
+    }
+}
+
++ (NSArray<AUTLogContext *> *)registeredContexts {
+    @synchronized(registeredContexts) {
+        NSArray *contextIdentifiers = registeredContexts.allValues;
+        NSMutableArray *contexts = [NSMutableArray arrayWithCapacity:contextIdentifiers.count];
+        
+        // Map context identifiers to contexts
+        [contextIdentifiers enumerateObjectsUsingBlock:^(NSNumber *contextIndentifier, NSUInteger idx, BOOL *stop) {
+            AUTLogContext *context = [self contextForIdentifier:contextIndentifier.integerValue];
+            [contexts addObject:context];
+        }];
+        
+        return [contexts copy];
+    }
+}
+
++ (void)resetRegisteredContexts {
+    @synchronized(registeredContexts) {
         registeredContexts = [NSMutableDictionary dictionary];
-    }
-    return registeredContexts.allValues;
+    };
 }
 
-void AUTLogContextResetRegisteredContexts() {
-    NSCAssert(NSThread.isMainThread, @"AUTLogContextResetRegisteredContexts must be invoked from the main thread");
-    
-    registeredContexts = [NSMutableDictionary dictionary];
-}
+@end
 
 NS_ASSUME_NONNULL_END

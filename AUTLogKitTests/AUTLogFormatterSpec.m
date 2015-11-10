@@ -18,7 +18,7 @@
 SpecBegin(AUTLogFormatter)
 
 NSString * (^contextPrefixedLog)(NSString *log, AUTLogContext *context) = ^ NSString * (NSString *log, AUTLogContext *context) {
-    return [NSString stringWithFormat:@"%@: %@", AUTLogContextGetName(context), log];
+    return [NSString stringWithFormat:@"%@: %@", context.name, log];
 };
 
 __block NSError *error;
@@ -45,8 +45,8 @@ describe(@"lifecycle", ^{
 });
 
 it(@"should not filter messages that do not have contexts", ^{
-    NSDictionary *includedLevelsByContext = @{ @1: @(AUTLogLevelOff) };
-    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient includingLevelsByContext:includedLevelsByContext];
+    NSDictionary *includingLevelsByContextID = @{ @1: @(AUTLogLevelOff) };
+    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient includingLevelsByContextID:includingLevelsByContextID];
     
     DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:@"foo" level:DDLogLevelInfo flag:DDLogFlagInfo context:0 file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
 
@@ -64,8 +64,8 @@ it(@"should not filter message with context when no included log levels by conte
 });
 
 it(@"should filter message not within the included contexts", ^{
-    NSDictionary *includedLevelsByContext = @{ @1: @(AUTLogLevelAll) };
-    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient includingLevelsByContext:includedLevelsByContext];
+    NSDictionary *includingLevelsByContextID = @{ @1: @(AUTLogLevelAll) };
+    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient includingLevelsByContextID:includingLevelsByContextID];
 
     DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:@"foo" level:DDLogLevelInfo flag:DDLogFlagInfo context:2 file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
     
@@ -75,8 +75,8 @@ it(@"should filter message not within the included contexts", ^{
 
 it(@"should filter message that do not reach a high enough level", ^{
     NSUInteger context = 1;
-    NSDictionary *includedLevelsByContext = @{ @(context): @(AUTLogLevelError) };
-    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient includingLevelsByContext:includedLevelsByContext];
+    NSDictionary *includingLevelsByContextID = @{ @(context): @(AUTLogLevelError) };
+    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient includingLevelsByContextID:includingLevelsByContextID];
 
     DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:@"foo" level:DDLogLevelInfo flag:DDLogFlagInfo context:context file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
     
@@ -86,8 +86,8 @@ it(@"should filter message that do not reach a high enough level", ^{
 
 it(@"should not filter messages that do not reach a high enough level", ^{
     NSUInteger context = 1;
-    NSDictionary *includedLevelsByContext = @{ @(context): @(AUTLogLevelInfo) };
-    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient includingLevelsByContext:includedLevelsByContext];
+    NSDictionary *includingLevelsByContextID = @{ @(context): @(AUTLogLevelInfo) };
+    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient includingLevelsByContextID:includingLevelsByContextID];
 
     DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:@"foo" level:DDLogLevelError flag:DDLogFlagError context:context file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
     
@@ -97,8 +97,8 @@ it(@"should not filter messages that do not reach a high enough level", ^{
 
 it(@"should not filter message with non excluded context", ^{
     NSUInteger context = 1;
-    NSDictionary *includedLevelsByContext = @{ @(context): @(AUTLogLevelAll) };
-    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient includingLevelsByContext:includedLevelsByContext];
+    NSDictionary *includingLevelsByContextID = @{ @(context): @(AUTLogLevelAll) };
+    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient includingLevelsByContextID:includingLevelsByContextID];
 
     DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:@"foo" level:DDLogLevelInfo flag:DDLogFlagInfo context:context file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
     
@@ -121,7 +121,7 @@ it(@"should prepend context name", ^{
     
     NSString *message = @"foo";
     AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsServer];
-    DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:message level:DDLogLevelInfo flag:DDLogFlagInfo context:AUTLogContextGetIdentifier(AUTLogKitTestContext) file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
+    DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:message level:DDLogLevelInfo flag:DDLogFlagInfo context:AUTLogKitTestContext.identifier file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
     
     NSString *formattedMessage = [logFormatter formatLogMessage:logMessage];
     expect(formattedMessage).equal(contextPrefixedLog(message, AUTLogKitTestContext));

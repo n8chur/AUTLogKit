@@ -25,36 +25,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (instancetype)init {
-    return [self initWithDateFormatter:nil options:AUTLogFormatterOutputOptionsClient includingLevelsByContext:nil];
+    return [self initWithDateFormatter:nil options:AUTLogFormatterOutputOptionsClient includingLevelsByContextID:nil];
 }
 
 - (instancetype)initWithOptions:(AUTLogFormatterOutputOptions)options {
     return [self initWithDateFormatter:nil options:options];
 }
 
-- (instancetype)initWithOptions:(AUTLogFormatterOutputOptions)options includingLevelsByContext:(nullable NSDictionary *)includedLevelsByContext {
-    return [self initWithDateFormatter:nil options:options includingLevelsByContext:includedLevelsByContext];
+- (instancetype)initWithOptions:(AUTLogFormatterOutputOptions)options includingLevelsByContextID:(nullable NSDictionary<NSNumber *, NSNumber *> *)includingLevelsByContextID {
+    return [self initWithDateFormatter:nil options:options includingLevelsByContextID:includingLevelsByContextID];
 }
 
 - (instancetype)initWithDateFormatter:(nullable NSDateFormatter *)formatter options:(AUTLogFormatterOutputOptions)options {
-    return [self initWithDateFormatter:formatter options:options includingLevelsByContext:nil];
+    return [self initWithDateFormatter:formatter options:options includingLevelsByContextID:nil];
 }
 
-- (instancetype)initWithDateFormatter:(nullable NSDateFormatter *)formatter options:(AUTLogFormatterOutputOptions)options includingLevelsByContext:(nullable NSDictionary *)includedLevelsByContext {
+- (instancetype)initWithDateFormatter:(nullable NSDateFormatter *)formatter options:(AUTLogFormatterOutputOptions)options includingLevelsByContextID:(nullable NSDictionary<NSNumber *, NSNumber *> *)levelsByContextID {
     self = [super init];
     if (self == nil) return nil;
     
     _dateFormatter = formatter;
     _options = options;
-    _includedLevelsByContext = [includedLevelsByContext copy];
-
-    // When we get a log message, the context is an AUTLogContext Identifier,
-    // so we can't easily go back to a context pointer.
-    NSMutableDictionary *includedLevelsByContextIdentifiers = [NSMutableDictionary dictionary];
-    [includedLevelsByContext enumerateKeysAndObjectsUsingBlock:^(NSValue *context, NSNumber *level, BOOL *stop) {
-        includedLevelsByContextIdentifiers[@(AUTLogContextGetIdentifier(context.pointerValue))] = level;
-    }];
-    _includedLevelsByContextIdentifiers = [includedLevelsByContextIdentifiers copy];
+    _includedLevelsByContextID = [levelsByContextID copy];
     
     return self;
 }
@@ -79,8 +71,9 @@ NS_ASSUME_NONNULL_BEGIN
     NSString *output = [logMessage.message copy];
     
     // Prepend context name
-    if (logMessage.context && AUTLogContextGetContext(logMessage.context) != nil) {
-        output = [NSString stringWithFormat:@"%@: %@", AUTLogContextGetName((AUTLogContext *)logMessage.context), output];
+    if (logMessage.context && [AUTLogContext contextForIdentifier:logMessage.context] != nil) {
+        AUTLogContext *context = [AUTLogContext contextForIdentifier:logMessage.context];
+        output = [NSString stringWithFormat:@"%@: %@", context.name, output];
     }
  
     if (self.options == AUTLogFormatterOutputOptionsClient) {
@@ -94,12 +87,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)shouldLogMessage:(DDLogMessage *)logMessage {
     // If not levels are set, log everything.
-    if (self.includedLevelsByContext == nil) return YES;
+    if (self.includedLevelsByContextID == nil) return YES;
 
     // If the log message does not have a context, log.
     if (logMessage.context == 0) return YES;
 
-    NSNumber *level = self.includedLevelsByContextIdentifiers[@(logMessage.context)];
+    NSNumber *level = self.includedLevelsByContextID[@(logMessage.context)];
 
     // If no level was specified for the given context, it should not be logged.
     if (level == nil) return NO;
