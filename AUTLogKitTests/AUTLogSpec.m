@@ -6,8 +6,9 @@
 //  Copyright (c) 2015 Automatic Labs. All rights reserved.
 //
 
-#import <Specta/Specta.h>
-#import <Expecta/Expecta.h>
+@import Specta;
+@import Expecta;
+
 #import <AUTLogKit/AUTLogKit.h>
 #import "AUTBlockLogger.h"
 
