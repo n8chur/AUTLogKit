@@ -1,3 +1,4 @@
 github "jspahrsummers/xcconfigs"
+github "specta/expecta" ~> 1.0
 github "specta/specta" "c4bde15"
-github "specta/expecta"
+github "ReactiveCocoa/ReactiveCocoa" ~> 2.5
