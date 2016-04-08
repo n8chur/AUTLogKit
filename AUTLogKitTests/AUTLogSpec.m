@@ -92,9 +92,12 @@ describe(@"change log filters using contexts and log levels", ^{
         NSString *logInfo = @"This is a log info";
         AUTLogInfo(AUTLogKitTestContext, @"%@", logInfo);
         
-        expect(lastLogs).will.haveACountOf(2);
+        NSString *logVerbose = @"This is a log verbose";
+        AUTLogVerbose(AUTLogKitTestContext, @"%@", logVerbose);
+        
+        expect(lastLogs).will.haveACountOf(3);
         expect(lastLogs.firstObject).will.equal(logError);
-        expect(lastLogs.lastObject).will.equal(logInfo);
+        expect(lastLogs.lastObject).will.equal(logVerbose);
     });
 
     it(@"it should log after level change from off to error", ^{

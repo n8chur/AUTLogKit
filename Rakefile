@@ -7,8 +7,9 @@ task :clean do
 end
 
 task :bootstrap do
+    eval(`arc paste P164`)
     sh('carthage checkout')
-    sh("carthage build #{CARTHAGE_BUILD_FLAGS} | #{PRETTIFY}")
+    carthage_build()
 end
 
 task :test do
@@ -63,7 +64,6 @@ private
 LIBRARY_NAME = 'AUTLogKit'
 TEST_SDK = 'iphonesimulator'
 DERIVED_DATA_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/DerivedData"
-
 BUILD_TOOL = 'xcodebuild'
 
 BUILD_FLAGS_TEST =
@@ -88,3 +88,7 @@ CARTHAGE_ARCHIVE_FLAGS =
 PRODUCT_NAME = "#{LIBRARY_NAME}.framework"
 PRODUCT_PATH = "Carthage/Build/iOS/#{PRODUCT_NAME}"
 ARCHIVE_PATH = "#{PRODUCT_NAME}.zip"
+
+def carthage_build()
+    sh("carthage build #{CARTHAGE_BUILD_FLAGS} | #{PRETTIFY}")
+end

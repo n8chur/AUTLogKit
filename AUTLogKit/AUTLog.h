@@ -14,15 +14,17 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NSInteger AUTLogContextIdentifier;
 
 typedef NS_OPTIONS(NSUInteger, AUTLogFlag) {
-    AUTLogFlagError      = DDLogFlagError, // 0...00001
-    AUTLogFlagInfo       = DDLogFlagInfo,  // 0...00100
+    AUTLogFlagError      = DDLogFlagError,   // 0...00001
+    AUTLogFlagInfo       = DDLogFlagInfo,    // 0...00100
+    AUTLogFlagVerbose    = DDLogFlagVerbose, // 0...10000
 };
 
 typedef NS_OPTIONS(NSUInteger, AUTLogLevel) {
-    AUTLogLevelOff   = 0,
-    AUTLogLevelError = AUTLogFlagError,
-    AUTLogLevelInfo  = (AUTLogLevelError | AUTLogFlagInfo),
-    AUTLogLevelAll   = NSUIntegerMax,
+    AUTLogLevelOff     = 0,
+    AUTLogLevelError   = AUTLogFlagError,
+    AUTLogLevelInfo    = (AUTLogLevelError | AUTLogFlagInfo),
+    AUTLogLevelVerbose = (AUTLogLevelError | AUTLogFlagInfo | DDLogFlagVerbose),
+    AUTLogLevelAll     = NSUIntegerMax,
 };
 
 /// A context to associate a group of related log statements.
@@ -70,14 +72,15 @@ typedef NS_OPTIONS(NSUInteger, AUTLogLevel) {
 /// in the case of a crash.
 #define AUTLogError(ctx, frmt, ...) AUT_LOG_MAYBE(YES, ctx, AUTLogFlagError, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 #define AUTLogInfo(ctx, frmt, ...)  AUT_LOG_MAYBE(YES, ctx, AUTLogFlagInfo, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+#define AUTLogVerbose(ctx, frmt, ...) AUT_LOG_MAYBE(YES, ctx, AUTLogFlagVerbose, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
 /// A macro to define a given context in a header file as extern.
 #define AUTLOGKIT_CONTEXT_DECLARE(ctx) extern AUTLogContext *ctx;
 
-/// A macro to initialize a given context in an implementation file passing
-/// a default level and a context name, automatically registering it at load
-/// time.
-#define AUTLOGKIT_CONTEXT_INIT(ctx, _level, name) \
+/// A macro to initialize a given context in an implementation file with a
+/// context name, automatically registering it at load time with a default log
+/// level of AUTLogLevelError.
+#define AUTLOGKIT_CONTEXT_INIT(ctx, name) \
     AUTLogContext *ctx; \
     @interface AUTLogContext ## ctx : AUTLogContext \
     @end \
@@ -85,7 +88,7 @@ typedef NS_OPTIONS(NSUInteger, AUTLogLevel) {
         + (void)load { \
             static dispatch_once_t onceToken; \
             dispatch_once(&onceToken, ^{ \
-                ctx = [[AUTLogContext alloc] initWithName:@(name) level:_level]; \
+                ctx = [[AUTLogContext alloc] initWithName:@(name) level:AUTLogLevelError]; \
             }); \
         } \
     @end

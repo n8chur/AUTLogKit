@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
     // Filter out log messages with context we don't care about if configured
     if (![self shouldLogMessage:logMessage]) return nil;
     
-    NSString *output = [logMessage.message copy];
+    NSString *output = logMessage.message;
     
     // Prepend context name
     if (logMessage.context && [AUTLogContext contextForIdentifier:logMessage.context] != nil) {
