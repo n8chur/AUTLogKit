@@ -78,7 +78,7 @@ PRETTIFY = "xcpretty; exit ${PIPESTATUS[0]}"
 # Carthage
 
 CARTHAGE_BUILD_FLAGS =
-    "--platform iOS "\
+    "--platform iOS,watchOS "\
     "--verbose"
 
 CARTHAGE_ARCHIVE_FLAGS =
