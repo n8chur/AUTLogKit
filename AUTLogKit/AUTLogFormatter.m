@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - DDLogFormatter
 
-- (NSString *)formatLogMessage:(DDLogMessage *)logMessage {
+- (nullable NSString *)formatLogMessage:(DDLogMessage *)logMessage {
     // Filter out log messages with context we don't care about if configured
     if (![self shouldLogMessage:logMessage]) return nil;
     
