@@ -8,7 +8,7 @@
 
 @import Specta;
 @import Expecta;
-@import ReactiveCocoa;
+@import ReactiveObjC;
 @import AUTLogKit;
 
 #import "AUTLog_Private.h"
