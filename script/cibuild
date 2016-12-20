@@ -1,5 +1,0 @@
-#!/bin/bash -ex
-
-if [ -z "$BUILD_TYPE" ]; then echo 'The BUILD_TYPE variable is unset, you must set it to continue.'; exit 1; fi
-
-rake "$BUILD_TYPE"

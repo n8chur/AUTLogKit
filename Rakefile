@@ -79,13 +79,5 @@ PRETTIFY = "xcpretty; exit ${PIPESTATUS[0]}"
 
 # Carthage
 
-CARTHAGE_BUILD_FLAGS =
-    "--platform iOS,watchOS "\
-    "--verbose"
-
-CARTHAGE_ARCHIVE_FLAGS =
-    "--no-skip-current " +
-    CARTHAGE_BUILD_FLAGS
-
 PRODUCT_NAME = "#{LIBRARY_NAME}.framework"
 ARCHIVE_PATH = "#{PRODUCT_NAME}.zip"
