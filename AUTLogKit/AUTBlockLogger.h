@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Automatic Labs. All rights reserved.
 //
 
-@import UIKit;
+@import Foundation;
 @import CocoaLumberjack;
 
 NS_ASSUME_NONNULL_BEGIN

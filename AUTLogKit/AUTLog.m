@@ -10,6 +10,7 @@
 #import <libkern/OSAtomic.h>
 
 #import "AUTLog.h"
+#import "AUTExtObjC.h"
 #import "AUTLog_Private.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -33,9 +34,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *registeredContexts;
     });
 }
 
-- (instancetype)init {
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Use the designated initializer instead" userInfo:nil];
-}
+- (instancetype)init AUT_UNAVAILABLE_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithName:(NSString *)name level:(AUTLogLevel)level {
     NSParameterAssert(name != NULL);
@@ -71,12 +70,12 @@ static NSMutableDictionary<NSString *, NSNumber *> *registeredContexts;
 
 + (NSArray<AUTLogContext *> *)registeredContexts {
     @synchronized(registeredContexts) {
-        NSArray *contextIdentifiers = registeredContexts.allValues;
-        NSMutableArray *contexts = [NSMutableArray arrayWithCapacity:contextIdentifiers.count];
+        let contextIdentifiers = registeredContexts.allValues;
+        NSMutableArray<AUTLogContext *> *contexts = [NSMutableArray arrayWithCapacity:contextIdentifiers.count];
         
         // Map context identifiers to contexts
         [contextIdentifiers enumerateObjectsUsingBlock:^(NSNumber *contextIndentifier, NSUInteger idx, BOOL *stop) {
-            AUTLogContext *context = [self contextForIdentifier:contextIndentifier.integerValue];
+            let context = [self contextForIdentifier:contextIndentifier.integerValue];
             [contexts addObject:context];
         }];
         

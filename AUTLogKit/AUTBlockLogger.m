@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Automatic Labs. All rights reserved.
 //
 
+#import "AUTExtObjC.h"
+
 #import "AUTBlockLogger.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -13,16 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AUTBlockLogger ()
 
 @property (nonatomic, copy) LogBlock logBlock;
-@property (nonatomic) dispatch_queue_t queue;
+@property (nonatomic, nullable) dispatch_queue_t queue;
 
 @end
 
 @implementation AUTBlockLogger
 
-- (instancetype)init {
-    NSString *reason = [NSString stringWithFormat:@"Use designated initializer instead"];
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
-}
+- (instancetype)init AUT_UNAVAILABLE_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithLogBlock:(LogBlock)logBlock {
     return [self initWithLogBlock:logBlock queue:nil];
@@ -32,7 +31,6 @@ NS_ASSUME_NONNULL_BEGIN
     NSParameterAssert(logBlock != nil);
     
     self = [super init];
-    if (self == nil) return nil;
 
     _logBlock = [logBlock copy];
     _queue = queue;
@@ -41,9 +39,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)logMessage:(DDLogMessage *)logMessage {
-    NSString *formattedMessage = _logFormatter ? [_logFormatter formatLogMessage:logMessage] : logMessage->_message;
-    if (self.queue) {
-        dispatch_async(self.queue, ^{
+    let formattedMessage = _logFormatter ? [_logFormatter formatLogMessage:logMessage] : logMessage->_message;
+
+    let queue = self.queue;
+    if (queue != nil) {
+        dispatch_async(queue, ^{
             self.logBlock(formattedMessage, logMessage);
         });
     } else {

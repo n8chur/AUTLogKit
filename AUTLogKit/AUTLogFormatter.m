@@ -6,7 +6,8 @@
 //  Copyright (c) 2015 Automatic Labs. All rights reserved.
 //
 
-#import "AUTLogKit.h"
+#import "AUTExtObjC.h"
+#import "AUTLog.h"
 
 #import "AUTLogFormatter.h"
 
@@ -16,8 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) NSDateFormatter *dateFormatter;
 @property (nonatomic) AUTLogFormatterOutputOptions options;
-
-@property (readonly, nonatomic, copy, nullable) NSDictionary *includedLevelsByContextIdentifiers;
 
 @end
 
@@ -43,8 +42,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDateFormatter:(nullable NSDateFormatter *)formatter options:(AUTLogFormatterOutputOptions)options includingLevelsByContextID:(nullable NSDictionary<NSNumber *, NSNumber *> *)levelsByContextID {
     self = [super init];
     if (self == nil) return nil;
-    
-    _dateFormatter = formatter;
+
+    if (formatter != nil) {
+        _dateFormatter = AUTNotNil(formatter);
+    }
+
     _options = options;
     _includedLevelsByContextID = [levelsByContextID copy];
     
@@ -68,16 +70,16 @@ NS_ASSUME_NONNULL_BEGIN
     // Filter out log messages with context we don't care about if configured
     if (![self shouldLogMessage:logMessage]) return nil;
     
-    NSString *output = logMessage.message;
+    var output = logMessage.message;
     
     // Prepend context name
     if (logMessage.context && [AUTLogContext contextForIdentifier:logMessage.context] != nil) {
-        AUTLogContext *context = [AUTLogContext contextForIdentifier:logMessage.context];
+        let context = [AUTLogContext contextForIdentifier:logMessage.context];
         output = [NSString stringWithFormat:@"%@: %@", context.name, output];
     }
  
     if (self.options == AUTLogFormatterOutputOptionsClient) {
-        NSString *dateAndTime = [self.dateFormatter stringFromDate:logMessage.timestamp];
+        let dateAndTime = [self.dateFormatter stringFromDate:logMessage.timestamp];
         output = [NSString stringWithFormat:@"%@ %@", dateAndTime, output];
     }
     
@@ -92,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
     // If the log message does not have a context, log.
     if (logMessage.context == 0) return YES;
 
-    NSNumber *level = self.includedLevelsByContextID[@(logMessage.context)];
+    let level = self.includedLevelsByContextID[@(logMessage.context)];
 
     // If no level was specified for the given context, it should not be logged.
     if (level == nil) return NO;

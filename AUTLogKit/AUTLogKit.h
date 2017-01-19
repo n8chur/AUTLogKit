@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Automatic Labs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 //! Project version number for AUTLogKit.
 FOUNDATION_EXPORT double AUTLogKitVersionNumber;
