@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1004787F1B86961900ED5626 /* AUTLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1004787D1B86961900ED5626 /* AUTLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		100478801B86961900ED5626 /* AUTLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1004787E1B86961900ED5626 /* AUTLogFormatter.m */; };
 		100478821B869B9A00ED5626 /* AUTLogFormatterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 100478811B869B9A00ED5626 /* AUTLogFormatterSpec.m */; };
+		3A24F74E1E70D86F0023426D /* AUTLogFilteringFormatterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A24F74D1E70D86F0023426D /* AUTLogFilteringFormatterSpec.m */; };
+		3A24F7501E70D91C0023426D /* AUTLogTimestampFormatterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A24F74F1E70D91C0023426D /* AUTLogTimestampFormatterSpec.m */; };
+		3A24F7521E70D9CB0023426D /* AUTLogContextNameFormatterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A24F7511E70D9CB0023426D /* AUTLogContextNameFormatterSpec.m */; };
+		3A24F7551E70DD2A0023426D /* AUTLogRegexReplaceFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A24F7531E70DD2A0023426D /* AUTLogRegexReplaceFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A24F7561E70DD2A0023426D /* AUTLogRegexReplaceFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A24F7541E70DD2A0023426D /* AUTLogRegexReplaceFormatter.m */; };
+		3A24F7581E70E0710023426D /* AUTLogRegexReplaceFormatterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A24F7571E70E0710023426D /* AUTLogRegexReplaceFormatterSpec.m */; };
 		3A7BB1181E302B910065CE51 /* AUTAssertNotNil.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A7BB1111E302B910065CE51 /* AUTAssertNotNil.h */; };
 		3A7BB1191E302B910065CE51 /* AUTAutoType.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A7BB1121E302B910065CE51 /* AUTAutoType.h */; };
 		3A7BB11A1E302B910065CE51 /* AUTExtObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A7BB1131E302B910065CE51 /* AUTExtObjC.h */; };
@@ -19,6 +23,12 @@
 		3A7BB11E1E302B910065CE51 /* metamacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A7BB1171E302B910065CE51 /* metamacros.h */; };
 		3AD5FF5E1E09A89100D76C10 /* ReactiveObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD5FF5C1E09A87F00D76C10 /* ReactiveObjC.framework */; };
 		3AD5FF5F1E09ABB400D76C10 /* ReactiveObjC.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD5FF5C1E09A87F00D76C10 /* ReactiveObjC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3AF0738A1E70D26C003E5448 /* AUTLogFilteringFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AF073881E70D26C003E5448 /* AUTLogFilteringFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3AF0738B1E70D26C003E5448 /* AUTLogFilteringFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF073891E70D26C003E5448 /* AUTLogFilteringFormatter.m */; };
+		3AF0738E1E70D478003E5448 /* AUTLogTimestampFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AF0738C1E70D478003E5448 /* AUTLogTimestampFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3AF0738F1E70D478003E5448 /* AUTLogTimestampFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF0738D1E70D478003E5448 /* AUTLogTimestampFormatter.m */; };
+		3AF073941E70D5FB003E5448 /* AUTLogContextNameFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AF073921E70D5FB003E5448 /* AUTLogContextNameFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3AF073951E70D5FB003E5448 /* AUTLogContextNameFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF073931E70D5FB003E5448 /* AUTLogContextNameFormatter.m */; };
 		E4273F911B5734F300F99513 /* AUTBlockLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = E45C232A1B56DFBB0014C344 /* AUTBlockLogger.m */; };
 		E45C22E21B55D6EC0014C344 /* AUTLogKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E45C22E11B55D6EC0014C344 /* AUTLogKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E45C22E81B55D6ED0014C344 /* AUTLogKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45C22DC1B55D6EC0014C344 /* AUTLogKit.framework */; };
@@ -64,9 +74,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1004787D1B86961900ED5626 /* AUTLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUTLogFormatter.h; sourceTree = "<group>"; };
-		1004787E1B86961900ED5626 /* AUTLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogFormatter.m; sourceTree = "<group>"; };
 		100478811B869B9A00ED5626 /* AUTLogFormatterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogFormatterSpec.m; sourceTree = "<group>"; };
+		3A24F74D1E70D86F0023426D /* AUTLogFilteringFormatterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogFilteringFormatterSpec.m; sourceTree = "<group>"; };
+		3A24F74F1E70D91C0023426D /* AUTLogTimestampFormatterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogTimestampFormatterSpec.m; sourceTree = "<group>"; };
+		3A24F7511E70D9CB0023426D /* AUTLogContextNameFormatterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogContextNameFormatterSpec.m; sourceTree = "<group>"; };
+		3A24F7531E70DD2A0023426D /* AUTLogRegexReplaceFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUTLogRegexReplaceFormatter.h; sourceTree = "<group>"; };
+		3A24F7541E70DD2A0023426D /* AUTLogRegexReplaceFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogRegexReplaceFormatter.m; sourceTree = "<group>"; };
+		3A24F7571E70E0710023426D /* AUTLogRegexReplaceFormatterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogRegexReplaceFormatterSpec.m; sourceTree = "<group>"; };
 		3A7BB1111E302B910065CE51 /* AUTAssertNotNil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUTAssertNotNil.h; sourceTree = "<group>"; };
 		3A7BB1121E302B910065CE51 /* AUTAutoType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUTAutoType.h; sourceTree = "<group>"; };
 		3A7BB1131E302B910065CE51 /* AUTExtObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUTExtObjC.h; sourceTree = "<group>"; };
@@ -75,6 +89,12 @@
 		3A7BB1161E302B910065CE51 /* AUTUnavailableDesignatedInitializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUTUnavailableDesignatedInitializer.h; sourceTree = "<group>"; };
 		3A7BB1171E302B910065CE51 /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
 		3AD5FF5C1E09A87F00D76C10 /* ReactiveObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveObjC.framework; path = Carthage/Build/iOS/ReactiveObjC.framework; sourceTree = "<group>"; };
+		3AF073881E70D26C003E5448 /* AUTLogFilteringFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUTLogFilteringFormatter.h; sourceTree = "<group>"; };
+		3AF073891E70D26C003E5448 /* AUTLogFilteringFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogFilteringFormatter.m; sourceTree = "<group>"; };
+		3AF0738C1E70D478003E5448 /* AUTLogTimestampFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUTLogTimestampFormatter.h; sourceTree = "<group>"; };
+		3AF0738D1E70D478003E5448 /* AUTLogTimestampFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogTimestampFormatter.m; sourceTree = "<group>"; };
+		3AF073921E70D5FB003E5448 /* AUTLogContextNameFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUTLogContextNameFormatter.h; sourceTree = "<group>"; };
+		3AF073931E70D5FB003E5448 /* AUTLogContextNameFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogContextNameFormatter.m; sourceTree = "<group>"; };
 		E45C22DC1B55D6EC0014C344 /* AUTLogKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AUTLogKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E45C22E01B55D6EC0014C344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E45C22E11B55D6EC0014C344 /* AUTLogKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AUTLogKit.h; sourceTree = "<group>"; };
@@ -155,8 +175,12 @@
 		3AEF94F11B56E69600559E77 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				3A24F7511E70D9CB0023426D /* AUTLogContextNameFormatterSpec.m */,
+				3A24F74D1E70D86F0023426D /* AUTLogFilteringFormatterSpec.m */,
 				100478811B869B9A00ED5626 /* AUTLogFormatterSpec.m */,
+				3A24F7571E70E0710023426D /* AUTLogRegexReplaceFormatterSpec.m */,
 				E45C23251B55E4830014C344 /* AUTLogSpec.m */,
+				3A24F74F1E70D91C0023426D /* AUTLogTimestampFormatterSpec.m */,
 			);
 			name = Specs;
 			sourceTree = "<group>";
@@ -170,6 +194,31 @@
 			name = Helpers;
 			path = AUTLogKitTests;
 			sourceTree = SOURCE_ROOT;
+		};
+		3AF073901E70D4A1003E5448 /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				3AF073921E70D5FB003E5448 /* AUTLogContextNameFormatter.h */,
+				3AF073931E70D5FB003E5448 /* AUTLogContextNameFormatter.m */,
+				3AF073881E70D26C003E5448 /* AUTLogFilteringFormatter.h */,
+				3AF073891E70D26C003E5448 /* AUTLogFilteringFormatter.m */,
+				3A24F7531E70DD2A0023426D /* AUTLogRegexReplaceFormatter.h */,
+				3A24F7541E70DD2A0023426D /* AUTLogRegexReplaceFormatter.m */,
+				3AF0738C1E70D478003E5448 /* AUTLogTimestampFormatter.h */,
+				3AF0738D1E70D478003E5448 /* AUTLogTimestampFormatter.m */,
+			);
+			name = Formatters;
+			sourceTree = "<group>";
+		};
+		3AF073911E70D4AF003E5448 /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				E4DA0FFF1BF1394300E98C3F /* AUTLog_Private.h */,
+				E45C23141B55DA910014C344 /* AUTLog.h */,
+				E45C23271B55F3980014C344 /* AUTLog.m */,
+			);
+			name = Macros;
+			sourceTree = "<group>";
 		};
 		E45C22D21B55D6EC0014C344 = {
 			isa = PBXGroup;
@@ -195,14 +244,11 @@
 		E45C22DE1B55D6EC0014C344 /* AUTLogKit */ = {
 			isa = PBXGroup;
 			children = (
-				3AEF94F21B56E6A100559E77 /* Helpers */,
 				E45C22E11B55D6EC0014C344 /* AUTLogKit.h */,
-				E45C23141B55DA910014C344 /* AUTLog.h */,
-				E45C23271B55F3980014C344 /* AUTLog.m */,
-				1004787D1B86961900ED5626 /* AUTLogFormatter.h */,
-				1004787E1B86961900ED5626 /* AUTLogFormatter.m */,
+				3AF073901E70D4A1003E5448 /* Formatters */,
+				3AEF94F21B56E6A100559E77 /* Helpers */,
+				3AF073911E70D4AF003E5448 /* Macros */,
 				E45C22DF1B55D6EC0014C344 /* Supporting Files */,
-				E4DA0FFF1BF1394300E98C3F /* AUTLog_Private.h */,
 			);
 			path = AUTLogKit;
 			sourceTree = "<group>";
@@ -305,18 +351,21 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AF0738A1E70D26C003E5448 /* AUTLogFilteringFormatter.h in Headers */,
 				3A7BB11D1E302B910065CE51 /* AUTUnavailableDesignatedInitializer.h in Headers */,
 				3A7BB11C1E302B910065CE51 /* AUTStrongifyOr.h in Headers */,
 				E45C232B1B56DFBB0014C344 /* AUTBlockLogger.h in Headers */,
+				3AF0738E1E70D478003E5448 /* AUTLogTimestampFormatter.h in Headers */,
 				3A7BB11B1E302B910065CE51 /* AUTNotNil.h in Headers */,
 				E45C23161B55DA910014C344 /* AUTLog.h in Headers */,
 				E4DA10001BF139F000E98C3F /* AUTLog_Private.h in Headers */,
 				3A7BB11E1E302B910065CE51 /* metamacros.h in Headers */,
 				3A7BB11A1E302B910065CE51 /* AUTExtObjC.h in Headers */,
+				3A24F7551E70DD2A0023426D /* AUTLogRegexReplaceFormatter.h in Headers */,
 				E45C22E21B55D6EC0014C344 /* AUTLogKit.h in Headers */,
-				1004787F1B86961900ED5626 /* AUTLogFormatter.h in Headers */,
 				3A7BB1191E302B910065CE51 /* AUTAutoType.h in Headers */,
 				3A7BB1181E302B910065CE51 /* AUTAssertNotNil.h in Headers */,
+				3AF073941E70D5FB003E5448 /* AUTLogContextNameFormatter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,8 +485,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E45C23281B55F3980014C344 /* AUTLog.m in Sources */,
-				100478801B86961900ED5626 /* AUTLogFormatter.m in Sources */,
+				3AF0738B1E70D26C003E5448 /* AUTLogFilteringFormatter.m in Sources */,
+				3AF073951E70D5FB003E5448 /* AUTLogContextNameFormatter.m in Sources */,
+				3AF0738F1E70D478003E5448 /* AUTLogTimestampFormatter.m in Sources */,
 				E4273F911B5734F300F99513 /* AUTBlockLogger.m in Sources */,
+				3A24F7561E70DD2A0023426D /* AUTLogRegexReplaceFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,7 +497,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A24F7501E70D91C0023426D /* AUTLogTimestampFormatterSpec.m in Sources */,
 				E45C23261B55E4830014C344 /* AUTLogSpec.m in Sources */,
+				3A24F7581E70E0710023426D /* AUTLogRegexReplaceFormatterSpec.m in Sources */,
+				3A24F7521E70D9CB0023426D /* AUTLogContextNameFormatterSpec.m in Sources */,
+				3A24F74E1E70D86F0023426D /* AUTLogFilteringFormatterSpec.m in Sources */,
 				100478821B869B9A00ED5626 /* AUTLogFormatterSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

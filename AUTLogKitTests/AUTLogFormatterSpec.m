@@ -8,123 +8,85 @@
 
 @import Specta;
 @import Expecta;
-@import ReactiveObjC;
 @import AUTLogKit;
+@import CocoaLumberjack.DDMultiFormatter;
+#import <AUTLogKit/AUTLog_Private.h>
 
-#import "AUTLog_Private.h"
-
-#import "AUTLogFormatter.h"
+#import "AUTExtObjC.h"
 
 SpecBegin(AUTLogFormatter)
 
-NSString * (^contextPrefixedLog)(NSString *log, AUTLogContext *context) = ^ NSString * (NSString *log, AUTLogContext *context) {
-    return [NSString stringWithFormat:@"%@: %@", context.name, log];
-};
-
 __block NSError *error;
-__block AUTLogFormatter *logFormatter;
 
 beforeEach(^{
-    logFormatter = nil;
+    [AUTLogContext resetRegisteredContexts];
+
     error = nil;
 });
 
-describe(@"lifecycle", ^{
-    describe(@"deallocation", ^{
-        it(@"should occur", ^{
-            RACSignal *willDealloc;
-            @autoreleasepool{
-                AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient];
-                willDealloc = logFormatter.rac_willDeallocSignal;
-            }
-            BOOL success = [willDealloc asynchronouslyWaitUntilCompleted:&error];
-            expect(success).to.beTruthy();
-            expect(error).to.beNil();
-        });
-    });
+afterEach(^{
+    [AUTLogContext resetRegisteredContexts];
 });
 
-it(@"should not filter messages that do not have contexts", ^{
-    NSDictionary *includingLevelsByContextID = @{ @1: @(AUTLogLevelOff) };
-    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient includingLevelsByContextID:includingLevelsByContextID];
+it(@"should be composable", ^{
+    let multiFormatter = [[DDMultiFormatter alloc] init];
+
+    AUTLOGKIT_CONTEXT_CREATE_WITH_NAME(AUTLogKitTestContext, AUTLogLevelOff, "MultiTestContext");
+    AUTLOGKIT_CONTEXT_CREATE_WITH_NAME(AUTLogKitTestOmittedContext, AUTLogLevelOff, "MultiTestOmittedContext");
+
+    let filteringFormatter = [[AUTLogFilteringFormatter alloc] initWithIncludedLevelsByContextID:@{
+        @(AUTLogKitTestContext.identifier): @(AUTLogLevelAll),
+    }];
+
+    let regex = [NSRegularExpression regularExpressionWithPattern:@"\\b[0-9]{3}\\b" options:0 error:&error];
+    expect(error).to.beNil();
+    let regexFormatter = [[AUTLogRegexReplaceFormatter alloc] initWithRegularExpression:regex matchReplaceBlock:^(NSString *match) {
+        // Star out matches (e.g. 123 -> ***).
+        return [@"" stringByPaddingToLength:match.length withString:@"*" startingAtIndex:0];
+    }];
+
+    let contextNameLogFormatter = [[AUTLogContextNameFormatter alloc] init];
+    let timestampLogFormatter = [[AUTLogTimestampFormatter alloc] init];
+
+    [multiFormatter addFormatter:filteringFormatter];
+    [multiFormatter addFormatter:regexFormatter];
+    [multiFormatter addFormatter:contextNameLogFormatter];
+    [multiFormatter addFormatter:timestampLogFormatter];
+
+    let date = [NSDate dateWithTimeIntervalSince1970:0];
+    let identifier = AUTLogKitTestContext.identifier;
+
+    let logMessage = [[DDLogMessage alloc]
+        initWithMessage:@"foo 123"
+        level:DDLogLevelInfo
+        flag:DDLogFlagInfo
+        context:identifier
+        file:nil
+        function:nil
+        line:0
+        tag:nil
+        options:0
+        timestamp:date];
     
-    DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:@"foo" level:DDLogLevelInfo flag:DDLogFlagInfo context:0 file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
+    let formattedMessage = [multiFormatter formatLogMessage:logMessage];
+    expect(formattedMessage).to.equal(@"1969/12/31 16:00:00:000 MultiTestContext: foo ***");
 
-    NSString *formattedMessage = [logFormatter formatLogMessage:logMessage];
-    expect(formattedMessage).toNot.beNil();
-});
+    let omittedIdentifier = AUTLogKitTestOmittedContext.identifier;
 
-it(@"should not filter message with context when no included log levels by context is set", ^{
-    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient];
+    let omittedLogMessage = [[DDLogMessage alloc]
+        initWithMessage:@"bar"
+        level:DDLogLevelInfo
+        flag:DDLogFlagInfo
+        context:omittedIdentifier
+        file:nil
+        function:nil
+        line:0
+        tag:nil
+        options:0
+        timestamp:date];
     
-    DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:@"foo" level:DDLogLevelInfo flag:DDLogFlagInfo context:1 file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
-    
-    NSString *formattedMessage = [logFormatter formatLogMessage:logMessage];
-    expect(formattedMessage).toNot.beNil();
-});
-
-it(@"should filter message not within the included contexts", ^{
-    NSDictionary *includingLevelsByContextID = @{ @1: @(AUTLogLevelAll) };
-    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient includingLevelsByContextID:includingLevelsByContextID];
-
-    DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:@"foo" level:DDLogLevelInfo flag:DDLogFlagInfo context:2 file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
-    
-    NSString *formattedMessage = [logFormatter formatLogMessage:logMessage];
-    expect(formattedMessage).to.beNil();
-});
-
-it(@"should filter message that do not reach a high enough level", ^{
-    NSUInteger context = 1;
-    NSDictionary *includingLevelsByContextID = @{ @(context): @(AUTLogLevelError) };
-    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient includingLevelsByContextID:includingLevelsByContextID];
-
-    DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:@"foo" level:DDLogLevelInfo flag:DDLogFlagInfo context:context file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
-    
-    NSString *formattedMessage = [logFormatter formatLogMessage:logMessage];
-    expect(formattedMessage).to.beNil();
-});
-
-it(@"should not filter messages that do not reach a high enough level", ^{
-    NSUInteger context = 1;
-    NSDictionary *includingLevelsByContextID = @{ @(context): @(AUTLogLevelInfo) };
-    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient includingLevelsByContextID:includingLevelsByContextID];
-
-    DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:@"foo" level:DDLogLevelError flag:DDLogFlagError context:context file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
-    
-    NSString *formattedMessage = [logFormatter formatLogMessage:logMessage];
-    expect(formattedMessage).toNot.beNil();
-});
-
-it(@"should not filter message with non excluded context", ^{
-    NSUInteger context = 1;
-    NSDictionary *includingLevelsByContextID = @{ @(context): @(AUTLogLevelAll) };
-    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsClient includingLevelsByContextID:includingLevelsByContextID];
-
-    DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:@"foo" level:DDLogLevelInfo flag:DDLogFlagInfo context:context file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
-    
-    NSString *formattedMessage = [logFormatter formatLogMessage:logMessage];
-    expect(formattedMessage).toNot.beNil();
-});
-
-it(@"should not prepend date", ^{
-    NSString *message = @"foo";
-    
-    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsServer];
-    DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:message level:DDLogLevelInfo flag:DDLogFlagInfo context:2 file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
-    
-    NSString *formattedMessage = [logFormatter formatLogMessage:logMessage];
-    expect(formattedMessage).equal(message);
-});
-
-it(@"should prepend context name", ^{
-    AUTLOGKIT_CONTEXT_CREATE(AUTLogKitTestContext, AUTLogLevelAll);
-    
-    NSString *message = @"foo";
-    AUTLogFormatter *logFormatter = [[AUTLogFormatter alloc] initWithOptions:AUTLogFormatterOutputOptionsServer];
-    DDLogMessage *logMessage = [[DDLogMessage alloc] initWithMessage:message level:DDLogLevelInfo flag:DDLogFlagInfo context:AUTLogKitTestContext.identifier file:nil function:nil line:0 tag:nil options:0 timestamp:nil];
-    
-    NSString *formattedMessage = [logFormatter formatLogMessage:logMessage];
-    expect(formattedMessage).equal(contextPrefixedLog(message, AUTLogKitTestContext));
+    let omittedFormattedMessage = [multiFormatter formatLogMessage:omittedLogMessage];
+    expect(omittedFormattedMessage).to.beNil();
 });
 
 SpecEnd
