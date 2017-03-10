@@ -24,8 +24,8 @@ it(@"should prepend date", ^{
         level:DDLogLevelInfo
         flag:DDLogFlagInfo
         context:2
-        file:nil
-        function:nil
+        file:@(__FILE__)
+        function:@(__FUNCTION__)
         line:0
         tag:nil
         options:0

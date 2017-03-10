@@ -35,8 +35,8 @@ it(@"should prepend context names", ^{
         level:DDLogLevelInfo
         flag:DDLogFlagInfo
         context:identifier
-        file:nil
-        function:nil
+        file:@(__FILE__)
+        function:@(__FUNCTION__)
         line:0
         tag:nil
         options:0

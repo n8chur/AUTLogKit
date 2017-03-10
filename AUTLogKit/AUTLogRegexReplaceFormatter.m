@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
-- (NSString *)formatLogMessage:(DDLogMessage *)logMessage {
+- (nullable NSString *)formatLogMessage:(DDLogMessage *)logMessage {
     let message = logMessage.message;
     let range = NSMakeRange(0, logMessage.message.length);
     let matchResults = [self.regularExpression matchesInString:logMessage.message options:0 range:range];

@@ -1,5 +1,5 @@
 github "automatic/AUTExtObjC" "6fa9ec9c077b0349763bc4720519db1aa95ef657"
-github "CocoaLumberjack/CocoaLumberjack" "2.4.0"
+github "CocoaLumberjack/CocoaLumberjack" "3.1.0"
 github "luisobo/Nocilla" "0.10.0"
 github "ReactiveCocoa/ReactiveObjC" "2.1.2"
 github "specta/expecta" "v1.0.5"

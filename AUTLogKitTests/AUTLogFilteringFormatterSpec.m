@@ -20,8 +20,8 @@ let CreateLogMessage = ^(DDLogLevel level, DDLogFlag flag, NSInteger context) {
         level:level
         flag:flag
         context:context
-        file:nil
-        function:nil
+        file:@(__FILE__)
+        function:@(__FUNCTION__)
         line:0
         tag:nil
         options:0
