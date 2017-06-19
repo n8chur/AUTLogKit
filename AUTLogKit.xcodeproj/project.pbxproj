@@ -75,12 +75,14 @@
 
 /* Begin PBXFileReference section */
 		100478811B869B9A00ED5626 /* AUTLogFormatterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogFormatterSpec.m; sourceTree = "<group>"; };
+		3A0F5D201EF853A900FC51B0 /* AUTLogKitTestsStatic.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = AUTLogKitTestsStatic.xcconfig; path = AUTLogKitTests/AUTLogKitTestsStatic.xcconfig; sourceTree = "<group>"; };
 		3A24F74D1E70D86F0023426D /* AUTLogFilteringFormatterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogFilteringFormatterSpec.m; sourceTree = "<group>"; };
 		3A24F74F1E70D91C0023426D /* AUTLogTimestampFormatterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogTimestampFormatterSpec.m; sourceTree = "<group>"; };
 		3A24F7511E70D9CB0023426D /* AUTLogContextNameFormatterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogContextNameFormatterSpec.m; sourceTree = "<group>"; };
 		3A24F7531E70DD2A0023426D /* AUTLogRegexReplaceFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUTLogRegexReplaceFormatter.h; sourceTree = "<group>"; };
 		3A24F7541E70DD2A0023426D /* AUTLogRegexReplaceFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogRegexReplaceFormatter.m; sourceTree = "<group>"; };
 		3A24F7571E70E0710023426D /* AUTLogRegexReplaceFormatterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUTLogRegexReplaceFormatterSpec.m; sourceTree = "<group>"; };
+		3A4466AF1EF499E20004C01C /* AUTLogKitStatic.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; lineEnding = 0; name = AUTLogKitStatic.xcconfig; path = AUTLogKit/AUTLogKitStatic.xcconfig; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		3A7BB1111E302B910065CE51 /* AUTAssertNotNil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUTAssertNotNil.h; sourceTree = "<group>"; };
 		3A7BB1121E302B910065CE51 /* AUTAutoType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUTAutoType.h; sourceTree = "<group>"; };
 		3A7BB1131E302B910065CE51 /* AUTExtObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUTExtObjC.h; sourceTree = "<group>"; };
@@ -282,7 +284,9 @@
 			isa = PBXGroup;
 			children = (
 				E45C22F91B55D8590014C344 /* AUTLogKit.xcconfig */,
+				3A4466AF1EF499E20004C01C /* AUTLogKitStatic.xcconfig */,
 				E45C23131B55D8A10014C344 /* AUTLogKitTests.xcconfig */,
+				3A0F5D201EF853A900FC51B0 /* AUTLogKitTestsStatic.xcconfig */,
 				E45C22FA1B55D86C0014C344 /* Base */,
 				E45C230E1B55D86C0014C344 /* iOS */,
 			);
@@ -517,6 +521,48 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		3A0F5D211EF853C500FC51B0 /* Release Static */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E45C22FF1B55D86C0014C344 /* Release.xcconfig */;
+			buildSettings = {
+			};
+			name = "Release Static";
+		};
+		3A0F5D221EF853C500FC51B0 /* Release Static */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A4466AF1EF499E20004C01C /* AUTLogKitStatic.xcconfig */;
+			buildSettings = {
+			};
+			name = "Release Static";
+		};
+		3A0F5D231EF853C500FC51B0 /* Release Static */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A0F5D201EF853A900FC51B0 /* AUTLogKitTestsStatic.xcconfig */;
+			buildSettings = {
+			};
+			name = "Release Static";
+		};
+		3A4466B01EF499F90004C01C /* Debug Static */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E45C22FD1B55D86C0014C344 /* Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = "Debug Static";
+		};
+		3A4466B11EF499F90004C01C /* Debug Static */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A4466AF1EF499E20004C01C /* AUTLogKitStatic.xcconfig */;
+			buildSettings = {
+			};
+			name = "Debug Static";
+		};
+		3A4466B21EF499F90004C01C /* Debug Static */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A0F5D201EF853A900FC51B0 /* AUTLogKitTestsStatic.xcconfig */;
+			buildSettings = {
+			};
+			name = "Debug Static";
+		};
 		E45C22F01B55D6ED0014C344 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E45C22FD1B55D86C0014C344 /* Debug.xcconfig */;
@@ -566,7 +612,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E45C22F01B55D6ED0014C344 /* Debug */,
+				3A4466B01EF499F90004C01C /* Debug Static */,
 				E45C22F11B55D6ED0014C344 /* Release */,
+				3A0F5D211EF853C500FC51B0 /* Release Static */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -575,7 +623,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E45C22F31B55D6ED0014C344 /* Debug */,
+				3A4466B11EF499F90004C01C /* Debug Static */,
 				E45C22F41B55D6ED0014C344 /* Release */,
+				3A0F5D221EF853C500FC51B0 /* Release Static */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -584,7 +634,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E45C22F61B55D6ED0014C344 /* Debug */,
+				3A4466B21EF499F90004C01C /* Debug Static */,
 				E45C22F71B55D6ED0014C344 /* Release */,
+				3A0F5D231EF853C500FC51B0 /* Release Static */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
